@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Ming Hui · Comida China & Sushi a Domicilio</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { 
+            --primary-red: #b91c1c;
+            --primary-gold: #d97706;
+            --dark-bg: #1f1a15;
+            --light-bg: #fef9f0;
+        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--dark-bg); color: #2c2418; scroll-behavior: smooth; }
+        .bg-pattern { background-image: radial-gradient(rgba(185,28,28,0.05) 1.5px, transparent 1.5px); background-size: 28px 28px; }
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.6) 100%), 
+                        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=1500');
+            background-size: cover; background-position: center;
+        }
+        .modal-overlay { 
+            display: none; position: fixed; inset: 0; z-index: 9999; 
+            background: rgba(31, 26, 21, 0.98); backdrop-filter: blur(12px);
+            align-items: center; justify-content: center;
+        }
+        .modal-overlay.active { display: flex; animation: fadeIn 0.2s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .filter-btn { transition: all 0.2s ease; cursor: pointer; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+        .filter-btn.active { background: var(--primary-red) !important; color: white !important; border-color: var(--primary-red) !important; box-shadow: 0 4px 12px rgba(185,28,28,0.4);}
+        
+        .menu-item-card { transition: all 0.2s; cursor: pointer; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
+        .menu-item-card:hover { border-color: var(--primary-gold); transform: translateY(-2px); background: rgba(255,255,255,0.06); }
+        
+        .toast {
+            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: #1f2937; color: white; padding: 12px 24px; border-radius: 40px;
+            font-weight: 500; z-index: 99999; opacity: 0; transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: var(--primary-red); border-radius: 10px; }
+        
+        .floating-cart { position: fixed; bottom: 20px; left: 20px; right: 20px; z-index: 9000; display: none; transform: translateY(100px); transition: 0.3s; }
+        .floating-cart.active { display: block; transform: translateY(0); }
+    </style>
+</head>
+<body class="antialiased bg-pattern">
+
+    <div id="toast" class="toast"><i class="fas fa-dragon text-red-400"></i><span id="toastMessage">Agregado al pedido</span></div>
+
+    <!-- Carrito flotante móvil -->
+    <div id="floatingCart" class="floating-cart md:hidden">
+        <button onclick="openCartModal()" class="w-full bg-gradient-to-r from-red-700 to-red-800 text-white py-4 rounded-2xl shadow-xl font-bold flex justify-between px-6 items-center border border-white/20">
+            <span><i class="fas fa-shopping-bag mr-2"></i> Ver pedido</span>
+            <span id="floatTotal" class="bg-black/30 px-4 py-1 rounded-full text-sm">$0</span>
+        </button>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                <div class="w-9 h-9 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">M</div>
+                <div>
+                    <span class="text-xl font-black tracking-tight text-white">Ming Hui</span>
+                    <span class="text-red-500 text-[8px] font-bold uppercase block leading-none">China · Sushi</span>
+                </div>
+            </div>
+            <button onclick="openCartModal()" class="relative text-white">
+                <i class="fas fa-shopping-bag text-xl"></i>
+                <span id="cartCount" class="absolute -top-2 -right-2 bg-red-600 text-[9px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero-bg min-h-[85vh] flex items-center justify-center text-center px-4 relative">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#1f1a15] via-transparent to-transparent"></div>
+        <div class="max-w-3xl relative z-10">
+            <span class="text-red-400 text-xs tracking-[0.3em] block mb-3 font-semibold">SABOR ORIENTAL · ENTREGA RÁPIDA</span>
+            <h1 class="text-5xl md:text-7xl font-black text-white drop-shadow-2xl leading-tight">Lo mejor de <span class="text-red-500">China</span> y <span class="text-amber-500">Sushi</span></h1>
+            <p class="text-gray-200 mt-6 max-w-xl mx-auto">Rollos frescos, platos tradicionales y combos especiales. ¡Pide desde casa!</p>
+            <button onclick="openMenuModal()" class="mt-8 bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-bold uppercase tracking-wide transition shadow-xl text-sm">Ver menú y pedir ahora</button>
+        </div>
+    </section>
+
+    <!-- MODAL MENÚ PRINCIPAL -->
+    <div id="menuModal" class="modal-overlay p-4">
+        <div id="menuContainer" class="bg-white w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl relative custom-scroll">
+            <div class="sticky top-0 bg-white/95 backdrop-blur-sm px-6 py-4 border-b border-gray-200 flex justify-between items-center z-20">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-utensils text-red-600 text-xl"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">Nuestro menú</h2>
+                </div>
+                <button onclick="closeModal('menuModal')" class="text-gray-400 hover:text-red-600 text-2xl"><i class="fas fa-times-circle"></i></button>
+            </div>
+            <div class="p-6">
+                <!-- Filtros -->
+                <div id="filterBar" class="sticky top-16 z-30 bg-white/90 backdrop-blur-sm py-3 flex flex-wrap gap-2 border-b border-gray-100 mb-6">
+                    <button onclick="filterCategory('all', this)" class="filter-btn active bg-red-600 text-white text-[10px] font-bold px-5 py-2 rounded-full">🍜 Todo</button>
+                    <button onclick="filterCategory('china', this)" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🥡 China</button>
+                    <button onclick="filterCategory('sushi', this)" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🍣 Sushi</button>
+                    <button onclick="filterCategory('guisos', this)" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🍲 Guisos</button>
+                    <button onclick="filterCategory('extras', this)" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🥟 Extras</button>
+                </div>
+
+                <div id="menuContent" class="space-y-10"></div>
+                
+                <div class="text-center mt-8">
+                    <button onclick="openCartModal()" class="bg-red-600 text-white px-8 py-3 rounded-full font-bold shadow-md hover:bg-red-700 transition"><i class="fas fa-shopping-cart mr-2"></i> Ver mi pedido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PRODUCTO (NOTAS) -->
+    <div id="productModal" class="modal-overlay p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl overflow-hidden">
+            <div class="h-32 bg-red-50 flex items-center justify-center"><i class="fas fa-dragon text-5xl text-red-300"></i></div>
+            <div class="p-6">
+                <button onclick="closeModal('productModal')" class="float-right text-gray-400 hover:text-red-600"><i class="fas fa-times text-xl"></i></button>
+                <h3 id="modalProductName" class="text-2xl font-bold text-gray-800 mb-1">Producto</h3>
+                <p id="modalProductPrice" class="text-red-600 font-bold text-xl mb-4">$0</p>
+                <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Notas especiales</label>
+                <textarea id="productNotes" rows="2" class="w-full border border-gray-200 rounded-xl p-3 text-sm focus:ring-2 focus:ring-red-500/50 outline-none" placeholder="Ej. Sin picante, extra salsa de soya..."></textarea>
+                <div class="flex justify-between items-center mt-5">
+                    <div class="flex items-center gap-3 bg-gray-100 rounded-full px-4 py-1">
+                        <button onclick="updateModalQty(-1)" class="w-8 h-8 text-xl font-bold">-</button>
+                        <span id="modalQty" class="font-bold w-8 text-center">1</span>
+                        <button onclick="updateModalQty(1)" class="w-8 h-8 text-xl font-bold">+</button>
+                    </div>
+                    <button id="addToCartConfirmBtn" class="bg-red-600 text-white px-6 py-2 rounded-full font-bold">Agregar · <span id="modalTotal">$0</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CARRITO -->
+    <div id="cartModal" class="modal-overlay p-4">
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl p-6 relative border-t-4 border-red-500">
+            <button onclick="closeModal('cartModal')" class="absolute top-5 right-5 text-gray-400 hover:text-red-600"><i class="fas fa-times text-xl"></i></button>
+            <h2 class="text-2xl font-bold flex items-center gap-2"><i class="fas fa-shopping-bag text-red-600"></i> Mi pedido</h2>
+            <p class="text-gray-500 text-xs border-b pb-3 mt-2"><span id="cartCountText">0</span> productos</p>
+            <div id="cartItemsList" class="space-y-3 my-5 max-h-80 overflow-y-auto pr-1 custom-scroll"></div>
+            <div class="flex justify-between items-center border-t pt-4 font-bold text-xl">
+                <span>Total</span>
+                <span id="cartTotalPrice" class="text-red-600">$0</span>
+            </div>
+            <div class="mt-6 space-y-3">
+                <input type="text" id="orderName" placeholder="Tu nombre *" class="w-full p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-red-500">
+                <input type="text" id="orderPlace" placeholder="Dirección (colonia, calle, número) *" class="w-full p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-red-500">
+                <textarea id="orderNotes" rows="2" placeholder="Instrucciones (ej. tocar timbre, piso...)" class="w-full p-3 bg-gray-100 rounded-xl outline-none text-sm"></textarea>
+                <div id="orderBtnContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ================= CONFIGURACIÓN NEGOCIO =================
+        const CONFIG = {
+            name: "Ming Hui",
+            whatsapp: "528114973226",
+            openHour: 12,      // 12:00 PM (MEDIODÍA)
+            closeHour: 22,     // 10:00 PM
+            deliveryTime: "35-50 min",
+            deliveryZone: "Cerca de Universidad, Centro y zonas aledañas",
+            storageKey: 'minghui_cart',
+            currency: 'MXN'
+        };
+
+        // ================= MENÚ COMPLETO =================
+        const menuData = [
+            // China (platos chicos/grandes)
+            { id: 1, sec: "china", name: "Pollo con Brócoli", priceChico: 95, priceGrande: 140, desc: "Salteado con salsa de ostión", tag: "🌶️ Clásico" },
+            { id: 2, sec: "china", name: "Carne al Estilo Mongol", priceChico: 110, priceGrande: 165, desc: "Con cebolla y chile morrón", tag: "🔥 Popular" },
+            { id: 3, sec: "china", name: "Chow Mein de Pollo", priceChico: 90, priceGrande: 135, desc: "Fideo saltado con verduras", tag: "🍜 Fideo" },
+            { id: 4, sec: "china", name: "Arroz Fuego Oriental", priceChico: 85, priceGrande: 125, desc: "Arroz frito con huevo y vegetales", tag: "🍚 Arroz" },
+            { id: 5, sec: "china", name: "Camarón con Salsa Agridulce", priceChico: 130, priceGrande: 190, desc: "Camarón grande empanizado", tag: "🍤 Premium" },
+            // Sushi
+            { id: 6, sec: "sushi", name: "Roll California", priceChico: 75, priceGrande: null, desc: "8 piezas de aguacate, pepino y cangrejo", tag: "🍣 Clásico" },
+            { id: 7, sec: "sushi", name: "Roll Empanizado (Filadelfia)", priceChico: 95, priceGrande: null, desc: "Salmon, queso crema, crujiente", tag: "🔥 Tempura" },
+            { id: 8, sec: "sushi", name: "Sushi Mix (12 pzas)", priceChico: 150, priceGrande: null, desc: "Variedad de rollos fríos y empanizados", tag: "⭐ Surtido" },
+            // Guisos
+            { id: 9, sec: "guisos", name: "Pollo en Salsa Roja", priceChico: 85, priceGrande: 125, desc: "Con verduras, porción individual", tag: "🍲 Guisado" },
+            { id: 10, sec: "guisos", name: "Milanesa de Pollo", priceChico: 90, priceGrande: 135, desc: "Acompañada de arroz y ensalada", tag: "🍗 Crujiente" },
+            // Extras
+            { id: 11, sec: "extras", name: "Rollos Primavera (4 pzas)", priceChico: 60, priceGrande: null, desc: "Rellenos de verduras", tag: "🥟 Entrada" },
+            { id: 12, sec: "extras", name: "Queso Relleno de Camarón", priceChico: 85, priceGrande: null, desc: "Gratinado con camarón", tag: "🧀 Especial" }
+        ];
+
+        let cartItems = JSON.parse(localStorage.getItem(CONFIG.storageKey)) || [];
+        let currentProduct = null;
+        let currentModalQty = 1;
+        let currentSize = 'chico';
+        let activeCategory = 'all';
+
+        const formatter = new Intl.NumberFormat('es-MX', { style: 'currency', currency: CONFIG.currency, minimumFractionDigits: 0 });
+
+        function getProductPrice(product, size) {
+            if (size === 'grande' && product.priceGrande) return product.priceGrande;
+            return product.priceChico;
+        }
+
+        function getBusinessStatus() {
+            const now = new Date();
+            const hour = now.getHours();
+            return (hour >= CONFIG.openHour && hour < CONFIG.closeHour);
+        }
+
+        function updateUIStatus() {
+            const isOpen = getBusinessStatus();
+            const btnContainer = document.getElementById('orderBtnContainer');
+            if (btnContainer) {
+                btnContainer.innerHTML = isOpen
+                    ? `<button onclick="sendToWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2"><i class="fab fa-whatsapp"></i> Confirmar pedido por WhatsApp</button>`
+                    : `<div class="w-full bg-gray-200 text-gray-500 py-3 rounded-xl text-center font-bold">🔒 Cerrado · Abrimos a las ${CONFIG.openHour}:00 hrs</div>`;
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        function saveCart() { localStorage.setItem(CONFIG.storageKey, JSON.stringify(cartItems)); updateCartUI(); }
+
+        function updateCartUI() {
+            const list = document.getElementById('cartItemsList');
+            const totalSpan = document.getElementById('cartTotalPrice');
+            const badge = document.getElementById('cartCount');
+            const modalBadge = document.getElementById('modalCartCount');
+            const countText = document.getElementById('cartCountText');
+            const floatTotal = document.getElementById('floatTotal');
+            const floating = document.getElementById('floatingCart');
+            let totalItems = 0, totalMoney = 0;
+
+            if (!list) return;
+
+            if (cartItems.length === 0) {
+                list.innerHTML = '<div class="text-center text-gray-400 py-4">🛒 Carrito vacío</div>';
+                floating?.classList.remove('active');
+            } else {
+                list.innerHTML = cartItems.map((item, idx) => {
+                    const product = menuData.find(p => p.id === item.id);
+                    if (!product) return '';
+                    const price = getProductPrice(product, item.size);
+                    const subtotal = price * item.qty;
+                    totalItems += item.qty;
+                    totalMoney += subtotal;
+                    return `<div class="bg-gray-50 p-3 rounded-xl border">
+                                <div class="flex justify-between"><span class="font-bold">${product.name} (${item.size === 'grande' ? 'Grande' : 'Chico'})</span><span class="text-red-600 font-bold">${formatter.format(subtotal)}</span></div>
+                                ${item.notes ? `<p class="text-xs text-amber-600 mt-1">📝 "${item.notes}"</p>` : ''}
+                                <div class="flex justify-between items-center mt-2">
+                                    <div class="flex items-center gap-2 bg-white rounded-full border px-2 py-1">
+                                        <button onclick="updateQtyByIndex(${idx}, -1)" class="px-2">-</button>
+                                        <span>${item.qty}</span>
+                                        <button onclick="updateQtyByIndex(${idx}, 1)" class="px-2">+</button>
+                                    </div>
+                                    <button onclick="removeItem(${idx})" class="text-xs text-red-500">Eliminar</button>
+                                </div>
+                            </div>`;
+                }).join('');
+                floating?.classList.add('active');
+            }
+
+            badge.innerText = totalItems;
+            badge.classList.toggle('hidden', totalItems === 0);
+            if (modalBadge) modalBadge.innerText = totalItems;
+            if (countText) countText.innerText = totalItems;
+            totalSpan.innerText = formatter.format(totalMoney);
+            if (floatTotal) floatTotal.innerText = formatter.format(totalMoney);
+        }
+
+        function updateQtyByIndex(index, delta) {
+            let item = cartItems[index];
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) cartItems.splice(index, 1);
+            saveCart();
+        }
+        function removeItem(index) { cartItems.splice(index, 1); saveCart(); }
+
+        // FILTROS Y RENDER
+        function filterCategory(cat, btn) {
+            activeCategory = cat;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active', 'bg-red-600', 'text-white'));
+            btn.classList.add('active', 'bg-red-600', 'text-white');
+            renderMenu();
+        }
+
+        function renderMenu() {
+            const sectionsMap = { china: "🥡 Cocina China", sushi: "🍣 Sushi Especial", guisos: "🍲 Guisos y Platillos", extras: "🥟 Extras y Entradas" };
+            let keys = activeCategory === 'all' ? Object.keys(sectionsMap) : [activeCategory];
+            const container = document.getElementById('menuContent');
+            if (!container) return;
+            container.innerHTML = keys.map(key => `
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800 border-l-4 border-red-500 pl-3 mb-4">${sectionsMap[key]}</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${menuData.filter(p => p.sec === key).map(product => {
+                            const hasGrande = product.priceGrande !== null;
+                            return `<div class="menu-item-card rounded-2xl p-4 flex justify-between items-start" onclick="openProductModal(${product.id})">
+                                        <div>
+                                            <div class="flex items-center gap-2"><span class="font-bold text-gray-800">${product.name}</span>${product.tag ? `<span class="text-[8px] bg-red-100 text-red-700 px-2 py-0.5 rounded-full">${product.tag}</span>` : ''}</div>
+                                            <p class="text-gray-500 text-xs mt-0.5">${product.desc}</p>
+                                            <div class="flex gap-3 mt-2 text-sm font-bold">
+                                                <span class="text-red-600">Chico ${formatter.format(product.priceChico)}</span>
+                                                ${hasGrande ? `<span class="text-gray-600">Grande ${formatter.format(product.priceGrande)}</span>` : ''}
+                                            </div>
+                                        </div>
+                                        <button class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-red-700"><i class="fas fa-plus text-sm"></i></button>
+                                    </div>`;
+                        }).join('')}
+                    </div>
+                </div>`).join('');
+        }
+
+        // MODAL PRODUCTO
+        function openProductModal(id) {
+            currentProduct = menuData.find(p => p.id === id);
+            if (!currentProduct) return;
+            currentModalQty = 1;
+            currentSize = currentProduct.priceGrande ? 'chico' : 'chico';
+            document.getElementById('modalProductName').innerText = currentProduct.name;
+            document.getElementById('modalProductPrice').innerHTML = `<span class="flex gap-3 items-center"><span class="cursor-pointer ${currentSize === 'chico' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('chico')">Chico ${formatter.format(currentProduct.priceChico)}</span>${currentProduct.priceGrande ? `<span class="cursor-pointer ${currentSize === 'grande' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('grande')">Grande ${formatter.format(currentProduct.priceGrande)}</span>` : ''}</span>`;
+            document.getElementById('productNotes').value = '';
+            updateModalQty(0);
+            document.getElementById('productModal').classList.add('active');
+            document.getElementById('addToCartConfirmBtn').onclick = () => {
+                let notes = document.getElementById('productNotes').value.trim();
+                let price = getProductPrice(currentProduct, currentSize);
+                cartItems.push({ id: currentProduct.id, qty: currentModalQty, size: currentSize, notes: notes });
+                saveCart();
+                showToast(`+ ${currentModalQty}x ${currentProduct.name} (${currentSize === 'grande' ? 'Grande' : 'Chico'})`);
+                closeModal('productModal');
+            };
+        }
+        function setSizeAndUpdate(size) { currentSize = size; if (currentProduct) { document.getElementById('modalProductPrice').innerHTML = `<span class="flex gap-3 items-center"><span class="cursor-pointer ${size === 'chico' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('chico')">Chico ${formatter.format(currentProduct.priceChico)}</span>${currentProduct.priceGrande ? `<span class="cursor-pointer ${size === 'grande' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('grande')">Grande ${formatter.format(currentProduct.priceGrande)}</span>` : ''}</span>`; updateModalQty(0); } }
+        function updateModalQty(delta) { currentModalQty = Math.max(1, currentModalQty + delta); document.getElementById('modalQty').innerText = currentModalQty; if (currentProduct) document.getElementById('modalTotal').innerText = formatter.format(getProductPrice(currentProduct, currentSize) * currentModalQty); }
+
+        // WHATSAPP
+        function sendToWhatsApp() {
+            if (!getBusinessStatus()) { alert(`🕒 Horario: ${CONFIG.openHour}:00 a ${CONFIG.closeHour}:00`); return; }
+            let name = document.getElementById('orderName')?.value.trim();
+            let addr = document.getElementById('orderPlace')?.value.trim();
+            if (!name || !addr) { alert("❌ Por favor ingresa tu nombre y dirección."); return; }
+            if (cartItems.length === 0) { alert("❌ Tu pedido está vacío."); return; }
+            let total = 0;
+            let msg = `*🍜 ${CONFIG.name} - NUEVO PEDIDO*%0A`;
+            msg += `*Cliente:* ${name}%0A`;
+            msg += `*Dirección:* ${addr}%0A`;
+            msg += `*Zona:* ${CONFIG.deliveryZone}%0A%0A`;
+            msg += `*Pedido:*%0A`;
+            cartItems.forEach(item => {
+                let p = menuData.find(m => m.id === item.id);
+                let price = getProductPrice(p, item.size);
+                let sub = price * item.qty;
+                total += sub;
+                msg += `▫️ ${item.qty}x ${p.name} (${item.size === 'grande' ? 'Grande' : 'Chico'})`;
+                if (item.notes) msg += ` [📝 ${item.notes}]`;
+                msg += ` = *${formatter.format(sub)}*%0A`;
+            });
+            msg += `%0a*TOTAL: ${formatter.format(total)}*%0a`;
+            let extras = document.getElementById('orderNotes')?.value.trim();
+            if (extras) msg += `%0a*Instrucciones:* ${extras}%0a`;
+            msg += `%0a⏱️ Tiempo estimado: ${CONFIG.deliveryTime}`;
+            window.open(`https://wa.me/${CONFIG.whatsapp}?text=${msg}`, '_blank');
+            cartItems = []; saveCart(); closeModal('cartModal');
+            showToast("✅ Pedido enviado por WhatsApp");
+        }
+
+        function openMenuModal() { document.getElementById('menuModal').classList.add('active'); document.body.style.overflow = 'hidden'; renderMenu(); }
+        function openCartModal() { document.getElementById('cartModal').classList.add('active'); document.body.style.overflow = 'hidden'; updateCartUI(); updateUIStatus(); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); document.body.style.overflow = 'auto'; }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartUI();
+            updateUIStatus();
+            setInterval(updateUIStatus, 60000);
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal('menuModal'); closeModal('cartModal'); closeModal('productModal'); } });
+        });
+    </script>
+</body>
+</html>
