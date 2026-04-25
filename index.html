@@ -54,14 +54,11 @@
             backdrop-filter: blur(6px);
         }
         .brand-logo {
-            width: 88px;
-            height: 88px;
-            border-radius: 22px;
-            background: #f2de57;
-            border: 3px solid rgba(255,255,255,0.35);
-            box-shadow: 0 10px 24px rgba(0,0,0,0.24);
+            width: 104px;
+            height: 104px;
             object-fit: contain;
-            padding: 8px;
+            display: block;
+            filter: drop-shadow(0 8px 18px rgba(0,0,0,0.22));
         }
         .hero-tag {
             background: var(--primary-yellow);
@@ -185,7 +182,7 @@
     <nav class="fixed w-full z-50 bg-[#1d2f84]/92 backdrop-blur-md border-b border-[#f2de57]/35 shadow-lg">
         <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
                 <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'}); logActivity('Click Logo')">
-                <img src="assets/branding/don-cepillo-logo.svg" alt="Don Cepillo" class="brand-logo">
+                <img src="assets/branding/don-cepillo-logo.png" alt="Don Cepillo" class="brand-logo">
                 <div>
                     <span class="text-xl brand-font font-black tracking-tight text-white">Don Cepillo</span>
                     <span class="text-[#f2de57] text-[8px] font-bold uppercase block leading-none">Suministro para negocios</span>
@@ -204,7 +201,7 @@
         <div class="max-w-4xl relative z-10 hero-card rounded-[2rem] md:rounded-[2.5rem] px-6 py-10 md:px-12 md:py-14">
             <span class="text-[#f2de57] text-xs tracking-[0.35em] block mb-4 font-bold uppercase">Venta al mayoreo para negocios</span>
             <div class="flex flex-col items-center gap-5">
-                <img src="assets/branding/don-cepillo-logo.svg" alt="Don Cepillo" class="w-48 md:w-56 max-w-[72vw] h-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.25)]">
+                <img src="assets/branding/don-cepillo-logo.png" alt="Don Cepillo" class="w-56 md:w-72 max-w-[78vw] h-auto drop-shadow-[0_12px_24px_rgba(0,0,0,0.28)]">
             </div>
             <p class="text-white/90 mt-5 max-w-2xl mx-auto text-base md:text-lg font-medium">
                 Trapeadores, escobas, fibras, esponjas y accesorios para tiendas, restaurantes, hoteles, oficinas y distribuidores.
