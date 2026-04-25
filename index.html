@@ -66,7 +66,7 @@
 </head>
 <body class="antialiased bg-pattern">
 
-    <div id="toast" class="toast"><i class="fas fa-broom text-yellow-300"></i><span id="toastMessage">Agregado al pedido</span></div>
+    <div id="toast" class="toast"><i class="fas fa-broom text-emerald-400"></i><span id="toastMessage">Agregado al pedido</span></div>
 
     <!-- Carrito flotante móvil -->
     <div id="floatingCart" class="floating-cart md:hidden">
@@ -80,10 +80,10 @@
     <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
         <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'}); logActivity('Click Logo')">
-                <div class="w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">D</div>
+                <div class="w-9 h-9 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">D</div>
                 <div>
                     <span class="text-xl font-black tracking-tight text-white">Don Cepillo</span>
-                    <span class="text-yellow-300 text-[8px] font-bold uppercase block leading-none">Mayoreo · Negocio y Hogar</span>
+                    <span class="text-yellow-300 text-[8px] font-bold uppercase block leading-none">Fábrica de trapeadores</span>
                 </div>
             </div>
             <button onclick="openCartModal(); logActivity('Abrir Carrito')" class="relative text-white">
@@ -97,10 +97,10 @@
     <section class="hero-bg min-h-[85vh] flex items-center justify-center text-center px-4 relative">
         <div class="absolute inset-0 bg-gradient-to-t from-[#1f1a15] via-transparent to-transparent"></div>
         <div class="max-w-3xl relative z-10">
-            <span class="text-blue-200 text-xs tracking-[0.3em] block mb-3 font-semibold">PRODUCTOS DE LIMPIEZA · PRECIOS DE MAYOREO</span>
-            <h1 class="text-5xl md:text-7xl font-black text-white drop-shadow-2xl leading-tight">Catálogo <span class="text-yellow-300">Don Cepillo</span></h1>
-            <p class="text-gray-200 mt-6 max-w-xl mx-auto">Surtimos principalmente a negocios y tiendas, sin cerrarnos a pedidos para hogar. Precios por pieza, paquete y docena.</p>
-            <button onclick="openMenuModal(); logActivity('Abrir Catálogo')" class="mt-8 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold uppercase tracking-wide transition shadow-xl text-sm">Ver catálogo y cotizar</button>
+            <span class="text-emerald-300 text-xs tracking-[0.3em] block mb-3 font-semibold">PRODUCTOS DE LIMPIEZA · PRECIOS DE MAYOREO</span>
+            <h1 class="text-5xl md:text-7xl font-black text-white drop-shadow-2xl leading-tight">Todo para tu <span class="text-emerald-400">limpieza</span> y <span class="text-amber-400">hogar</span></h1>
+            <p class="text-gray-200 mt-6 max-w-xl mx-auto">Trapeadores, escobas, fibras, esponjas y más. Levanta tu pedido por pieza, paquete o docena.</p>
+            <button onclick="openMenuModal(); logActivity('Abrir Catálogo')" class="mt-8 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-full font-bold uppercase tracking-wide transition shadow-xl text-sm">Ver catálogo y cotizar</button>
         </div>
     </section>
 
@@ -109,7 +109,7 @@
         <div id="menuContainer" class="bg-white w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl relative custom-scroll">
             <div class="sticky top-0 bg-white/95 backdrop-blur-sm px-6 py-4 border-b border-gray-200 flex justify-between items-center z-20">
                 <div class="flex items-center gap-2">
-                    <i class="fas fa-soap text-blue-600 text-xl"></i>
+                    <i class="fas fa-soap text-emerald-600 text-xl"></i>
                     <h2 class="text-2xl font-bold text-gray-800">Nuestro catálogo</h2>
                 </div>
                 <button onclick="closeModal('menuModal')" class="text-gray-400 hover:text-blue-600 text-2xl"><i class="fas fa-times-circle"></i></button>
@@ -117,7 +117,7 @@
             <div class="p-6">
                 <!-- Filtros -->
                 <div id="filterBar" class="sticky top-16 z-30 bg-white/90 backdrop-blur-sm py-3 flex flex-wrap gap-2 border-b border-gray-100 mb-6">
-                    <button onclick="filterCategory('all', this); logActivity('Filtrar: Todo')" class="filter-btn active bg-blue-600 text-white text-[10px] font-bold px-5 py-2 rounded-full">🧽 Todo</button>
+                    <button onclick="filterCategory('all', this); logActivity('Filtrar: Todo')" class="filter-btn active bg-red-600 text-white text-[10px] font-bold px-5 py-2 rounded-full">🧽 Todo</button>
                     <button onclick="filterCategory('trapeadores', this); logActivity('Filtrar: Trapeadores')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🪣 Trapeadores</button>
                     <button onclick="filterCategory('escobas', this); logActivity('Filtrar: Escobas')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🧹 Escobas</button>
                     <button onclick="filterCategory('limpieza', this); logActivity('Filtrar: Limpieza')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🧴 Limpieza</button>
@@ -127,7 +127,7 @@
                 <div id="menuContent" class="space-y-10"></div>
                 
                 <div class="text-center mt-8">
-                    <button onclick="openCartModal(); logActivity('Ver Pedido desde Catálogo')" class="bg-blue-600 text-white px-8 py-3 rounded-full font-bold shadow-md hover:bg-blue-700 transition"><i class="fas fa-shopping-cart mr-2"></i> Ver mi pedido</button>
+                    <button onclick="openCartModal(); logActivity('Ver Pedido desde Catálogo')" class="bg-emerald-600 text-white px-8 py-3 rounded-full font-bold shadow-md hover:bg-emerald-700 transition"><i class="fas fa-shopping-cart mr-2"></i> Ver mi pedido</button>
                 </div>
             </div>
         </div>
@@ -136,15 +136,13 @@
     <!-- MODAL PRODUCTO (NOTAS) -->
     <div id="productModal" class="modal-overlay p-4">
         <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl overflow-hidden">
-            <div class="h-44 bg-blue-50 flex items-center justify-center overflow-hidden">
-                <img id="modalProductImage" src="" alt="Producto" class="w-full h-full object-cover">
-            </div>
+            <div class="h-32 bg-emerald-50 flex items-center justify-center"><i class="fas fa-pump-soap text-5xl text-emerald-300"></i></div>
             <div class="p-6">
                 <button onclick="closeModal('productModal')" class="float-right text-gray-400 hover:text-blue-600"><i class="fas fa-times text-xl"></i></button>
                 <h3 id="modalProductName" class="text-2xl font-bold text-gray-800 mb-1">Producto</h3>
                 <p id="modalProductPrice" class="text-blue-700 font-bold text-xl mb-4">$0</p>
                 <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Notas especiales</label>
-                <textarea id="productNotes" rows="2" class="w-full border border-gray-200 rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500/50 outline-none" placeholder="Ej. color surtido, marca sugerida, tipo de uso..."></textarea>
+                <textarea id="productNotes" rows="2" class="w-full border border-gray-200 rounded-xl p-3 text-sm focus:ring-2 focus:ring-red-500/50 outline-none" placeholder="Ej. color surtido, marca sugerida, tipo de uso..."></textarea>
                 <div class="flex justify-between items-center mt-5">
                     <div class="flex items-center gap-3 bg-gray-100 rounded-full px-4 py-1">
                         <button onclick="updateModalQty(-1)" class="w-8 h-8 text-xl font-bold">-</button>
@@ -169,8 +167,8 @@
                 <span id="cartTotalPrice" class="text-blue-700">$0</span>
             </div>
             <div class="mt-6 space-y-3">
-                <input type="text" id="orderName" placeholder="Tu nombre *" class="w-full p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
-                <input type="text" id="orderPlace" placeholder="Dirección de entrega o punto de referencia *" class="w-full p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" id="orderName" placeholder="Tu nombre *" class="w-full p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-red-500">
+                <input type="text" id="orderPlace" placeholder="Dirección de entrega o punto de referencia *" class="w-full p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-red-500">
                 <textarea id="orderNotes" rows="2" placeholder="Instrucciones (ej. horario de entrega, referencia...)" class="w-full p-3 bg-gray-100 rounded-xl outline-none text-sm"></textarea>
                 <div id="orderBtnContainer"></div>
             </div>
@@ -353,7 +351,7 @@
                     totalItems += item.qty;
                     totalMoney += subtotal;
                     return `<div class="bg-gray-50 p-3 rounded-xl border">
-                                <div class="flex justify-between"><span class="font-bold">${product.name} (${item.size === 'grande' ? 'Docena' : 'Pieza'})</span><span class="text-blue-700 font-bold">${formatter.format(subtotal)}</span></div>
+                                <div class="flex justify-between"><span class="font-bold">${product.name} (${item.size === 'grande' ? 'Docena' : 'Pieza'})</span><span class="text-red-600 font-bold">${formatter.format(subtotal)}</span></div>
                                 ${item.notes ? `<p class="text-xs text-amber-600 mt-1">📝 "${item.notes}"</p>` : ''}
                                 <div class="flex justify-between items-center mt-2">
                                     <div class="flex items-center gap-2 bg-white rounded-full border px-2 py-1">
@@ -417,7 +415,7 @@
                                             <div class="flex items-center gap-2"><span class="font-bold text-gray-800">${product.name}</span>${product.tag ? `<span class="text-[8px] bg-yellow-100 text-blue-700 px-2 py-0.5 rounded-full">${product.tag}</span>` : ''}</div>
                                             <p class="text-gray-500 text-xs mt-0.5">${product.desc}</p>
                                             <div class="flex gap-3 mt-2 text-sm font-bold">
-                                                <span class="text-blue-700">Pieza ${formatter.format(product.priceChico)}</span>
+                                                <span class="text-red-600">Pieza ${formatter.format(product.priceChico)}</span>
                                                 ${hasGrande ? `<span class="text-gray-600">Docena ${formatter.format(product.priceGrande)}</span>` : ''}
                                             </div>
                                         </div>
@@ -435,9 +433,7 @@
             currentModalQty = 1;
             currentSize = currentProduct.priceGrande ? 'chico' : 'chico';
             document.getElementById('modalProductName').innerText = currentProduct.name;
-            document.getElementById('modalProductImage').src = getProductImage(currentProduct);
-            document.getElementById('modalProductImage').onerror = function() { this.src = fallbackImage; };
-            document.getElementById('modalProductPrice').innerHTML = `<span class="flex gap-3 items-center"><span class="cursor-pointer ${currentSize === 'chico' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('chico')">Pieza ${formatter.format(currentProduct.priceChico)}</span>${currentProduct.priceGrande ? `<span class="cursor-pointer ${currentSize === 'grande' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('grande')">Docena ${formatter.format(currentProduct.priceGrande)}</span>` : ''}</span>`;
+            document.getElementById('modalProductPrice').innerHTML = `<span class="flex gap-3 items-center"><span class="cursor-pointer ${currentSize === 'chico' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('chico')">Pieza ${formatter.format(currentProduct.priceChico)}</span>${currentProduct.priceGrande ? `<span class="cursor-pointer ${currentSize === 'grande' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('grande')">Docena ${formatter.format(currentProduct.priceGrande)}</span>` : ''}</span>`;
             document.getElementById('productNotes').value = '';
             updateModalQty(0);
             document.getElementById('productModal').classList.add('active');
@@ -460,7 +456,7 @@
         function setSizeAndUpdate(size) { 
             currentSize = size; 
             if (currentProduct) { 
-                document.getElementById('modalProductPrice').innerHTML = `<span class="flex gap-3 items-center"><span class="cursor-pointer ${size === 'chico' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('chico')">Pieza ${formatter.format(currentProduct.priceChico)}</span>${currentProduct.priceGrande ? `<span class="cursor-pointer ${size === 'grande' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('grande')">Docena ${formatter.format(currentProduct.priceGrande)}</span>` : ''}</span>`; 
+                document.getElementById('modalProductPrice').innerHTML = `<span class="flex gap-3 items-center"><span class="cursor-pointer ${size === 'chico' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('chico')">Pieza ${formatter.format(currentProduct.priceChico)}</span>${currentProduct.priceGrande ? `<span class="cursor-pointer ${size === 'grande' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('grande')">Docena ${formatter.format(currentProduct.priceGrande)}</span>` : ''}</span>`; 
                 updateModalQty(0); 
             } 
         }
