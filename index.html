@@ -625,27 +625,29 @@
             });
 
             // Construir mensaje de WhatsApp
-            let msg = `*🧽 ${CONFIG.name} - NUEVO PEDIDO*%0A`;
-            msg += `*Cliente:* ${name}%0A`;
-            msg += `*Dirección:* ${addr}%0A`;
-            msg += `*Zona:* ${CONFIG.deliveryZone}%0A%0A`;
-            msg += `*Pedido:*%0A`;
+            let msg = `*🧽 ${CONFIG.name} - NUEVO PEDIDO*\n`;
+            msg += `*Cliente:* ${name}\n`;
+            msg += `*Dirección:* ${addr}\n`;
+            msg += `*Zona:* ${CONFIG.deliveryZone}\n\n`;
+            msg += `*Pedido:*\n`;
             
             cartItems.forEach(item => {
                 let p = menuData.find(m => m.id === item.id);
+                if (!p) return;
                 let price = getProductPrice(p, item.size);
                 let sub = price * item.qty;
                 msg += `▫️ ${item.qty}x ${p.name} (${item.size === 'grande' ? 'Docena' : 'Pieza'})`;
                 if (item.notes) msg += ` [📝 ${item.notes}]`;
-                msg += ` = *${formatter.format(sub)}*%0A`;
+                msg += ` = *${formatter.format(sub)}*\n`;
             });
             
-            msg += `%0a*TOTAL: ${formatter.format(total)}*%0a`;
-            if (notes) msg += `%0a*Instrucciones:* ${notes}%0a`;
-            msg += `%0a⏱️ Tiempo estimado: ${CONFIG.deliveryTime}`;
+            msg += `\n*TOTAL: ${formatter.format(total)}*\n`;
+            if (notes) msg += `*Instrucciones:* ${notes}\n`;
+            msg += `⏱️ Tiempo estimado: ${CONFIG.deliveryTime}`;
             
             // Abrir WhatsApp
-            window.open(`https://wa.me/${CONFIG.whatsapp}?text=${msg}`, '_blank');
+            const whatsappUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+            window.open(whatsappUrl, '_blank');
             
             // Limpiar carrito
             cartItems = [];
