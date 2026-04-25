@@ -11,13 +11,13 @@
     
     <style>
         :root { 
-            --primary-red: #b91c1c;
-            --primary-gold: #d97706;
-            --dark-bg: #1f1a15;
-            --light-bg: #fef9f0;
+            --primary-red: #1d4ed8; /* azul tarjeta */
+            --primary-gold: #facc15; /* amarillo tarjeta */
+            --dark-bg: #0b1533;
+            --light-bg: #f4f8ff;
         }
         body { font-family: 'Poppins', sans-serif; background-color: var(--dark-bg); color: #2c2418; scroll-behavior: smooth; }
-        .bg-pattern { background-image: radial-gradient(rgba(185,28,28,0.05) 1.5px, transparent 1.5px); background-size: 28px 28px; }
+        .bg-pattern { background-image: radial-gradient(rgba(29,78,216,0.12) 1.5px, transparent 1.5px); background-size: 28px 28px; }
         .hero-bg {
             background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.6) 100%), 
                         url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=1500');
@@ -32,7 +32,7 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
         .filter-btn { transition: all 0.2s ease; cursor: pointer; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
-        .filter-btn.active { background: var(--primary-red) !important; color: white !important; border-color: var(--primary-red) !important; box-shadow: 0 4px 12px rgba(185,28,28,0.4);}
+        .filter-btn.active { background: var(--primary-red) !important; color: white !important; border-color: var(--primary-red) !important; box-shadow: 0 4px 12px rgba(29,78,216,0.4);}
         
         .menu-item-card { transition: all 0.2s; cursor: pointer; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
         .menu-item-card:hover { border-color: var(--primary-gold); transform: translateY(-2px); background: rgba(255,255,255,0.06); }
@@ -70,7 +70,7 @@
 
     <!-- Carrito flotante móvil -->
     <div id="floatingCart" class="floating-cart md:hidden">
-        <button onclick="openCartModal()" class="w-full bg-gradient-to-r from-red-700 to-red-800 text-white py-4 rounded-2xl shadow-xl font-bold flex justify-between px-6 items-center border border-white/20">
+        <button onclick="openCartModal()" class="w-full bg-gradient-to-r from-blue-700 to-blue-800 text-white py-4 rounded-2xl shadow-xl font-bold flex justify-between px-6 items-center border border-white/20">
             <span><i class="fas fa-shopping-bag mr-2"></i> Ver pedido</span>
             <span id="floatTotal" class="bg-black/30 px-4 py-1 rounded-full text-sm">$0</span>
         </button>
@@ -88,7 +88,7 @@
             </div>
             <button onclick="openCartModal(); logActivity('Abrir Carrito')" class="relative text-white">
                 <i class="fas fa-shopping-bag text-xl"></i>
-                <span id="cartCount" class="absolute -top-2 -right-2 bg-red-600 text-[9px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+                <span id="cartCount" class="absolute -top-2 -right-2 bg-blue-600 text-[9px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
             </button>
         </div>
     </nav>
@@ -112,7 +112,7 @@
                     <i class="fas fa-soap text-emerald-600 text-xl"></i>
                     <h2 class="text-2xl font-bold text-gray-800">Nuestro catálogo</h2>
                 </div>
-                <button onclick="closeModal('menuModal')" class="text-gray-400 hover:text-red-600 text-2xl"><i class="fas fa-times-circle"></i></button>
+                <button onclick="closeModal('menuModal')" class="text-gray-400 hover:text-blue-600 text-2xl"><i class="fas fa-times-circle"></i></button>
             </div>
             <div class="p-6">
                 <!-- Filtros -->
@@ -138,9 +138,9 @@
         <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl overflow-hidden">
             <div class="h-32 bg-emerald-50 flex items-center justify-center"><i class="fas fa-pump-soap text-5xl text-emerald-300"></i></div>
             <div class="p-6">
-                <button onclick="closeModal('productModal')" class="float-right text-gray-400 hover:text-red-600"><i class="fas fa-times text-xl"></i></button>
+                <button onclick="closeModal('productModal')" class="float-right text-gray-400 hover:text-blue-600"><i class="fas fa-times text-xl"></i></button>
                 <h3 id="modalProductName" class="text-2xl font-bold text-gray-800 mb-1">Producto</h3>
-                <p id="modalProductPrice" class="text-red-600 font-bold text-xl mb-4">$0</p>
+                <p id="modalProductPrice" class="text-blue-700 font-bold text-xl mb-4">$0</p>
                 <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Notas especiales</label>
                 <textarea id="productNotes" rows="2" class="w-full border border-gray-200 rounded-xl p-3 text-sm focus:ring-2 focus:ring-red-500/50 outline-none" placeholder="Ej. color surtido, marca sugerida, tipo de uso..."></textarea>
                 <div class="flex justify-between items-center mt-5">
@@ -149,7 +149,7 @@
                         <span id="modalQty" class="font-bold w-8 text-center">1</span>
                         <button onclick="updateModalQty(1)" class="w-8 h-8 text-xl font-bold">+</button>
                     </div>
-                    <button id="addToCartConfirmBtn" class="bg-red-600 text-white px-6 py-2 rounded-full font-bold">Agregar · <span id="modalTotal">$0</span></button>
+                    <button id="addToCartConfirmBtn" class="bg-blue-600 text-white px-6 py-2 rounded-full font-bold">Agregar · <span id="modalTotal">$0</span></button>
                 </div>
             </div>
         </div>
@@ -157,14 +157,14 @@
 
     <!-- MODAL CARRITO -->
     <div id="cartModal" class="modal-overlay p-4">
-        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl p-6 relative border-t-4 border-red-500">
-            <button onclick="closeModal('cartModal')" class="absolute top-5 right-5 text-gray-400 hover:text-red-600"><i class="fas fa-times text-xl"></i></button>
-            <h2 class="text-2xl font-bold flex items-center gap-2"><i class="fas fa-shopping-bag text-red-600"></i> Mi pedido</h2>
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl p-6 relative border-t-4 border-blue-500">
+            <button onclick="closeModal('cartModal')" class="absolute top-5 right-5 text-gray-400 hover:text-blue-600"><i class="fas fa-times text-xl"></i></button>
+            <h2 class="text-2xl font-bold flex items-center gap-2"><i class="fas fa-shopping-bag text-blue-700"></i> Mi pedido</h2>
             <p class="text-gray-500 text-xs border-b pb-3 mt-2"><span id="cartCountText">0</span> productos</p>
             <div id="cartItemsList" class="space-y-3 my-5 max-h-80 overflow-y-auto pr-1 custom-scroll"></div>
             <div class="flex justify-between items-center border-t pt-4 font-bold text-xl">
                 <span>Total</span>
-                <span id="cartTotalPrice" class="text-red-600">$0</span>
+                <span id="cartTotalPrice" class="text-blue-700">$0</span>
             </div>
             <div class="mt-6 space-y-3">
                 <input type="text" id="orderName" placeholder="Tu nombre *" class="w-full p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-red-500">
@@ -282,6 +282,17 @@
         let activeCategory = 'all';
 
         const formatter = new Intl.NumberFormat('es-MX', { style: 'currency', currency: CONFIG.currency, minimumFractionDigits: 0 });
+        const categoryImages = {
+            trapeadores: "https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?auto=format&fit=crop&q=80&w=1200",
+            escobas: "https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&q=80&w=1200",
+            limpieza: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&q=80&w=1200",
+            varios: "https://images.unsplash.com/photo-1616627981459-8f0c8f5f16c5?auto=format&fit=crop&q=80&w=1200"
+        };
+        const fallbackImage = "https://via.placeholder.com/600x400/1d4ed8/facc15?text=Don+Cepillo";
+
+        function getProductImage(product) {
+            return product.image || categoryImages[product.sec] || fallbackImage;
+        }
 
         function getProductPrice(product, size) {
             if (size === 'grande' && product.priceGrande) return product.priceGrande;
@@ -348,7 +359,7 @@
                                         <span>${item.qty}</span>
                                         <button onclick="updateQtyByIndex(${idx}, 1)" class="px-2">+</button>
                                     </div>
-                                    <button onclick="removeItem(${idx})" class="text-xs text-red-500">Eliminar</button>
+                                    <button onclick="removeItem(${idx})" class="text-xs text-blue-600">Eliminar</button>
                                 </div>
                             </div>`;
                 }).join('');
@@ -382,8 +393,8 @@
         // FILTROS Y RENDER
         function filterCategory(cat, btn) {
             activeCategory = cat;
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active', 'bg-red-600', 'text-white'));
-            btn.classList.add('active', 'bg-red-600', 'text-white');
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active', 'bg-blue-600', 'text-white'));
+            btn.classList.add('active', 'bg-blue-600', 'text-white');
             renderMenu();
         }
 
@@ -394,20 +405,21 @@
             if (!container) return;
             container.innerHTML = keys.map(key => `
                 <div>
-                    <h3 class="text-xl font-bold text-gray-800 border-l-4 border-red-500 pl-3 mb-4">${sectionsMap[key]}</h3>
+                    <h3 class="text-xl font-bold text-gray-800 border-l-4 border-yellow-400 pl-3 mb-4">${sectionsMap[key]}</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         ${menuData.filter(p => p.sec === key).map(product => {
                             const hasGrande = product.priceGrande !== null;
-                            return `<div class="menu-item-card rounded-2xl p-4 flex justify-between items-start" onclick="openProductModal(${product.id})">
-                                        <div>
-                                            <div class="flex items-center gap-2"><span class="font-bold text-gray-800">${product.name}</span>${product.tag ? `<span class="text-[8px] bg-red-100 text-red-700 px-2 py-0.5 rounded-full">${product.tag}</span>` : ''}</div>
+                            return `<div class="menu-item-card rounded-2xl p-4 flex gap-3 items-start" onclick="openProductModal(${product.id})">
+                                        <img src="${getProductImage(product)}" onerror="this.src='${fallbackImage}'" alt="${product.name}" class="w-20 h-20 rounded-xl object-cover border border-blue-100">
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-2"><span class="font-bold text-gray-800">${product.name}</span>${product.tag ? `<span class="text-[8px] bg-yellow-100 text-blue-700 px-2 py-0.5 rounded-full">${product.tag}</span>` : ''}</div>
                                             <p class="text-gray-500 text-xs mt-0.5">${product.desc}</p>
                                             <div class="flex gap-3 mt-2 text-sm font-bold">
                                                 <span class="text-red-600">Pieza ${formatter.format(product.priceChico)}</span>
                                                 ${hasGrande ? `<span class="text-gray-600">Docena ${formatter.format(product.priceGrande)}</span>` : ''}
                                             </div>
                                         </div>
-                                        <button class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-red-700"><i class="fas fa-plus text-sm"></i></button>
+                                        <button class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-blue-700"><i class="fas fa-plus text-sm"></i></button>
                                     </div>`;
                         }).join('')}
                     </div>
