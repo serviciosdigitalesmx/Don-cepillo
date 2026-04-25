@@ -7,39 +7,88 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
     
     <style>
         :root { 
-            --primary-red: #1d4ed8; /* azul tarjeta */
-            --primary-gold: #facc15; /* amarillo tarjeta */
-            --dark-bg: #0b1533;
-            --light-bg: #f4f8ff;
+            --primary-blue: #2d4fbf;
+            --primary-blue-deep: #1d2f84;
+            --primary-yellow: #f2de57;
+            --primary-red: #ef4444;
+            --dark-bg: #0a1638;
+            --light-bg: #f4f7ff;
+            --card-blue: #2f58c7;
+            --card-blue-2: #7db9ef;
         }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--dark-bg); color: #2c2418; scroll-behavior: smooth; }
-        .bg-pattern { background-image: radial-gradient(rgba(29,78,216,0.12) 1.5px, transparent 1.5px); background-size: 28px 28px; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--dark-bg); color: #24304a; scroll-behavior: smooth; }
+        .bg-pattern {
+            background:
+                radial-gradient(circle at 20% 20%, rgba(125,185,239,0.28) 0 2px, transparent 2px),
+                radial-gradient(circle at 80% 15%, rgba(242,222,87,0.14) 0 1.5px, transparent 1.5px),
+                linear-gradient(180deg, rgba(12, 24, 71, 0.95), rgba(9, 18, 54, 1));
+            background-size: 36px 36px, 28px 28px, auto;
+        }
+        .brand-font { font-family: 'Fredoka', sans-serif; letter-spacing: 0.02em; }
         .hero-bg {
-            background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.6) 100%), 
-                        url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=1500');
-            background-size: cover; background-position: center;
+            background:
+                radial-gradient(circle at 18% 24%, rgba(255,255,255,0.12) 0 10px, transparent 11px),
+                radial-gradient(circle at 72% 32%, rgba(255,255,255,0.12) 0 12px, transparent 13px),
+                linear-gradient(135deg, rgba(45,79,191,0.95) 0%, rgba(29,47,132,0.96) 55%, rgba(17,27,86,0.98) 100%);
+            background-size: auto;
+            position: relative;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 25%, rgba(125,185,239,0.35), transparent 28%),
+                radial-gradient(circle at 82% 15%, rgba(242,222,87,0.28), transparent 20%),
+                radial-gradient(circle at 85% 82%, rgba(239,68,68,0.15), transparent 25%);
+            pointer-events: none;
+        }
+        .hero-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.08));
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+            backdrop-filter: blur(6px);
+        }
+        .hero-tag {
+            background: var(--primary-yellow);
+            color: var(--primary-blue-deep);
+            clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%);
+        }
+        .poster-stripe {
+            background: linear-gradient(90deg, var(--primary-yellow), #f7e981);
         }
         .modal-overlay { 
             display: none; position: fixed; inset: 0; z-index: 9999; 
-            background: rgba(31, 26, 21, 0.98); backdrop-filter: blur(12px);
+            background: rgba(10, 22, 56, 0.96); backdrop-filter: blur(12px);
             align-items: center; justify-content: center;
         }
         .modal-overlay.active { display: flex; animation: fadeIn 0.2s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        .filter-btn { transition: all 0.2s ease; cursor: pointer; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
-        .filter-btn.active { background: var(--primary-red) !important; color: white !important; border-color: var(--primary-red) !important; box-shadow: 0 4px 12px rgba(29,78,216,0.4);}
+        .filter-btn { transition: all 0.2s ease; cursor: pointer; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); }
+        .filter-btn.active { background: var(--primary-yellow) !important; color: var(--primary-blue-deep) !important; border-color: var(--primary-yellow) !important; box-shadow: 0 8px 18px rgba(242,222,87,0.28);}
         
-        .menu-item-card { transition: all 0.2s; cursor: pointer; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
-        .menu-item-card:hover { border-color: var(--primary-gold); transform: translateY(-2px); background: rgba(255,255,255,0.06); }
+        .menu-item-card {
+            transition: all 0.2s;
+            cursor: pointer;
+            background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(242,247,255,0.92));
+            border: 1px solid rgba(45,79,191,0.10);
+            box-shadow: 0 10px 28px rgba(18, 33, 81, 0.12);
+        }
+        .menu-item-card:hover { border-color: rgba(242,222,87,0.85); transform: translateY(-3px); box-shadow: 0 16px 34px rgba(18, 33, 81, 0.16); }
+        .section-chip {
+            background: linear-gradient(90deg, var(--primary-blue), var(--card-blue-2));
+            color: white;
+            box-shadow: 0 8px 20px rgba(45,79,191,0.28);
+        }
         
         .toast {
             position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px);
-            background: #1f2937; color: white; padding: 12px 24px; border-radius: 40px;
+            background: linear-gradient(90deg, var(--primary-blue-deep), var(--card-blue)); color: white; padding: 12px 24px; border-radius: 40px;
             font-weight: 500; z-index: 99999; opacity: 0; transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
@@ -70,58 +119,72 @@
 
     <!-- Carrito flotante móvil -->
     <div id="floatingCart" class="floating-cart md:hidden">
-        <button onclick="openCartModal()" class="w-full bg-gradient-to-r from-blue-700 to-blue-800 text-white py-4 rounded-2xl shadow-xl font-bold flex justify-between px-6 items-center border border-white/20">
+        <button onclick="openCartModal()" class="w-full bg-gradient-to-r from-[#2d4fbf] to-[#1d2f84] text-white py-4 rounded-2xl shadow-xl font-bold flex justify-between px-6 items-center border border-white/20">
             <span><i class="fas fa-shopping-bag mr-2"></i> Ver pedido</span>
-            <span id="floatTotal" class="bg-black/30 px-4 py-1 rounded-full text-sm">$0</span>
+            <span id="floatTotal" class="bg-[#f2de57] text-[#1d2f84] px-4 py-1 rounded-full text-sm">MXN 0</span>
         </button>
     </div>
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+    <nav class="fixed w-full z-50 bg-[#1d2f84]/92 backdrop-blur-md border-b border-[#f2de57]/35 shadow-lg">
         <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'}); logActivity('Click Logo')">
-                <div class="w-9 h-9 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">D</div>
+                <div class="w-10 h-10 bg-[#f2de57] rounded-full flex items-center justify-center text-[#1d2f84] font-black text-lg shadow-md">D</div>
                 <div>
-                    <span class="text-xl font-black tracking-tight text-white">Don Cepillo</span>
-                    <span class="text-emerald-400 text-[8px] font-bold uppercase block leading-none">Fábrica de trapeadores</span>
+                    <span class="text-xl brand-font font-black tracking-tight text-white">Don Cepillo</span>
+                    <span class="text-[#f2de57] text-[8px] font-bold uppercase block leading-none">Suministro para negocios</span>
                 </div>
             </div>
             <button onclick="openCartModal(); logActivity('Abrir Carrito')" class="relative text-white">
                 <i class="fas fa-shopping-bag text-xl"></i>
-                <span id="cartCount" class="absolute -top-2 -right-2 bg-blue-600 text-[9px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+                <span id="cartCount" class="absolute -top-2 -right-2 bg-[#f2de57] text-[#1d2f84] text-[9px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
             </button>
         </div>
     </nav>
 
     <!-- Hero -->
-    <section class="hero-bg min-h-[85vh] flex items-center justify-center text-center px-4 relative">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#1f1a15] via-transparent to-transparent"></div>
-        <div class="max-w-3xl relative z-10">
-            <span class="text-emerald-300 text-xs tracking-[0.3em] block mb-3 font-semibold">PRODUCTOS DE LIMPIEZA · PRECIOS DE MAYOREO</span>
-            <h1 class="text-5xl md:text-7xl font-black text-white drop-shadow-2xl leading-tight">Todo para tu <span class="text-emerald-400">limpieza</span> y <span class="text-amber-400">hogar</span></h1>
-            <p class="text-gray-200 mt-6 max-w-xl mx-auto">Trapeadores, escobas, fibras, esponjas y más. Levanta tu pedido por pieza, paquete o docena.</p>
-            <button onclick="openMenuModal(); logActivity('Abrir Catálogo')" class="mt-8 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-full font-bold uppercase tracking-wide transition shadow-xl text-sm">Ver catálogo y cotizar</button>
+    <section class="hero-bg min-h-[85vh] flex items-center justify-center text-center px-4 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#091236] via-transparent to-transparent"></div>
+        <div class="absolute top-4 right-4 md:top-8 md:right-10 hero-tag px-5 py-2 md:px-6 md:py-3 text-xs md:text-sm font-black uppercase rotate-6 shadow-lg">
+            Suministro para negocios
+        </div>
+        <div class="max-w-4xl relative z-10 hero-card rounded-[2rem] md:rounded-[2.5rem] px-6 py-10 md:px-12 md:py-14">
+            <span class="text-[#f2de57] text-xs tracking-[0.35em] block mb-4 font-bold uppercase">Venta al mayoreo para negocios</span>
+            <h1 class="brand-font text-5xl md:text-7xl font-black text-white drop-shadow-2xl leading-none">
+                <span class="text-[#f2de57]">Don</span> Cepillo
+            </h1>
+            <p class="text-white/90 mt-5 max-w-2xl mx-auto text-base md:text-lg font-medium">
+                Trapeadores, escobas, fibras, esponjas y accesorios para tiendas, restaurantes, hoteles, oficinas y distribuidores.
+            </p>
+            <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <span class="bg-white/15 text-white px-4 py-2 rounded-full border border-white/20 text-sm font-semibold">Negocios</span>
+                <span class="bg-[#f2de57] text-[#1d2f84] px-4 py-2 rounded-full border border-[#f2de57] text-sm font-black">Pedido rápido</span>
+                <span class="bg-[#ef4444] text-white px-4 py-2 rounded-full border border-white/15 text-sm font-semibold">Atención por WhatsApp</span>
+            </div>
+            <button onclick="openMenuModal(); logActivity('Abrir Catálogo')" class="mt-8 bg-[#f2de57] hover:bg-[#ffe96f] text-[#1d2f84] px-8 py-4 rounded-full font-black uppercase tracking-wide transition shadow-xl text-sm">
+                Ver catálogo y cotizar
+            </button>
         </div>
     </section>
 
     <!-- MODAL MENÚ PRINCIPAL -->
     <div id="menuModal" class="modal-overlay p-4">
-        <div id="menuContainer" class="bg-white w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl relative custom-scroll">
-            <div class="sticky top-0 bg-white/95 backdrop-blur-sm px-6 py-4 border-b border-gray-200 flex justify-between items-center z-20">
+        <div id="menuContainer" class="bg-[#f4f7ff] w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl relative custom-scroll">
+            <div class="sticky top-0 bg-[#1d2f84]/96 backdrop-blur-sm px-6 py-4 border-b border-[#f2de57]/35 flex justify-between items-center z-20">
                 <div class="flex items-center gap-2">
-                    <i class="fas fa-soap text-emerald-600 text-xl"></i>
-                    <h2 class="text-2xl font-bold text-gray-800">Nuestro catálogo</h2>
+                    <i class="fas fa-soap text-[#f2de57] text-xl"></i>
+                    <h2 class="text-2xl font-black text-white brand-font">Catálogo para negocios</h2>
                 </div>
-                <button onclick="closeModal('menuModal')" class="text-gray-400 hover:text-blue-600 text-2xl"><i class="fas fa-times-circle"></i></button>
+                <button onclick="closeModal('menuModal')" class="text-white/80 hover:text-[#f2de57] text-2xl"><i class="fas fa-times-circle"></i></button>
             </div>
             <div class="p-6">
                 <!-- Filtros -->
-                <div id="filterBar" class="sticky top-16 z-30 bg-white/90 backdrop-blur-sm py-3 flex flex-wrap gap-2 border-b border-gray-100 mb-6">
-                    <button onclick="filterCategory('all', this); logActivity('Filtrar: Todo')" class="filter-btn active bg-red-600 text-white text-[10px] font-bold px-5 py-2 rounded-full">🧽 Todo</button>
-                    <button onclick="filterCategory('trapeadores', this); logActivity('Filtrar: Trapeadores')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🪣 Trapeadores</button>
-                    <button onclick="filterCategory('escobas', this); logActivity('Filtrar: Escobas')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🧹 Escobas</button>
-                    <button onclick="filterCategory('limpieza', this); logActivity('Filtrar: Limpieza')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🧴 Limpieza</button>
-                    <button onclick="filterCategory('varios', this); logActivity('Filtrar: Varios')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">📦 Varios</button>
+                <div id="filterBar" class="sticky top-16 z-30 bg-[#f4f7ff]/92 backdrop-blur-sm py-3 flex flex-wrap gap-2 border-b border-[#d7e1ff] mb-6">
+                    <button onclick="filterCategory('all', this); logActivity('Filtrar: Todo')" class="filter-btn active text-[#1d2f84] text-[10px] font-black px-5 py-2 rounded-full">🧽 Todo</button>
+                    <button onclick="filterCategory('trapeadores', this); logActivity('Filtrar: Trapeadores')" class="filter-btn text-slate-100 text-[10px] font-black px-5 py-2 rounded-full">🪣 Trapeadores</button>
+                    <button onclick="filterCategory('escobas', this); logActivity('Filtrar: Escobas')" class="filter-btn text-slate-100 text-[10px] font-black px-5 py-2 rounded-full">🧹 Escobas</button>
+                    <button onclick="filterCategory('limpieza', this); logActivity('Filtrar: Limpieza')" class="filter-btn text-slate-100 text-[10px] font-black px-5 py-2 rounded-full">🧴 Limpieza</button>
+                    <button onclick="filterCategory('varios', this); logActivity('Filtrar: Varios')" class="filter-btn text-slate-100 text-[10px] font-black px-5 py-2 rounded-full">📦 Varios</button>
                 </div>
 
                 <div id="menuContent" class="space-y-10"></div>
@@ -135,21 +198,21 @@
 
     <!-- MODAL PRODUCTO (NOTAS) -->
     <div id="productModal" class="modal-overlay p-4">
-        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl overflow-hidden">
-            <div class="h-32 bg-emerald-50 flex items-center justify-center"><i class="fas fa-pump-soap text-5xl text-emerald-300"></i></div>
+        <div class="bg-[#f4f7ff] rounded-3xl max-w-md w-full shadow-2xl overflow-hidden border border-[#d7e1ff]">
+            <div class="h-32 bg-gradient-to-r from-[#2d4fbf] to-[#7db9ef] flex items-center justify-center"><i class="fas fa-pump-soap text-5xl text-[#f2de57]"></i></div>
             <div class="p-6">
-                <button onclick="closeModal('productModal')" class="float-right text-gray-400 hover:text-blue-600"><i class="fas fa-times text-xl"></i></button>
-                <h3 id="modalProductName" class="text-2xl font-bold text-gray-800 mb-1">Producto</h3>
-                <p id="modalProductPrice" class="text-blue-700 font-bold text-xl mb-4">$0</p>
+                <button onclick="closeModal('productModal')" class="float-right text-slate-400 hover:text-[#2d4fbf]"><i class="fas fa-times text-xl"></i></button>
+                <h3 id="modalProductName" class="text-2xl font-black text-[#1d2f84] mb-1 brand-font">Producto</h3>
+                <p id="modalProductPrice" class="text-[#2d4fbf] font-black text-xl mb-4">$0</p>
                 <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Notas especiales</label>
-                <textarea id="productNotes" rows="2" class="w-full border border-gray-200 rounded-xl p-3 text-sm focus:ring-2 focus:ring-red-500/50 outline-none" placeholder="Ej. color surtido, marca sugerida, tipo de uso..."></textarea>
+                <textarea id="productNotes" rows="2" class="w-full border border-[#d7e1ff] rounded-xl p-3 text-sm focus:ring-2 focus:ring-[#2d4fbf]/50 outline-none" placeholder="Ej. color surtido, marca sugerida, tipo de uso..."></textarea>
                 <div class="flex justify-between items-center mt-5">
-                    <div class="flex items-center gap-3 bg-gray-100 rounded-full px-4 py-1">
+                    <div class="flex items-center gap-3 bg-white rounded-full px-4 py-1 border border-[#d7e1ff]">
                         <button onclick="updateModalQty(-1)" class="w-8 h-8 text-xl font-bold">-</button>
                         <span id="modalQty" class="font-bold w-8 text-center">1</span>
                         <button onclick="updateModalQty(1)" class="w-8 h-8 text-xl font-bold">+</button>
                     </div>
-                    <button id="addToCartConfirmBtn" class="bg-blue-600 text-white px-6 py-2 rounded-full font-bold">Agregar · <span id="modalTotal">$0</span></button>
+                    <button id="addToCartConfirmBtn" class="bg-[#2d4fbf] text-white px-6 py-2 rounded-full font-black">Agregar · <span id="modalTotal">$0</span></button>
                 </div>
             </div>
         </div>
@@ -157,19 +220,19 @@
 
     <!-- MODAL CARRITO -->
     <div id="cartModal" class="modal-overlay p-4">
-        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl p-6 relative border-t-4 border-blue-500">
-            <button onclick="closeModal('cartModal')" class="absolute top-5 right-5 text-gray-400 hover:text-blue-600"><i class="fas fa-times text-xl"></i></button>
-            <h2 class="text-2xl font-bold flex items-center gap-2"><i class="fas fa-shopping-bag text-blue-700"></i> Mi pedido</h2>
+        <div class="bg-[#f4f7ff] w-full max-w-lg rounded-3xl shadow-2xl p-6 relative border-t-4 border-[#f2de57]">
+            <button onclick="closeModal('cartModal')" class="absolute top-5 right-5 text-slate-400 hover:text-[#2d4fbf]"><i class="fas fa-times text-xl"></i></button>
+            <h2 class="text-2xl font-black flex items-center gap-2 brand-font text-[#1d2f84]"><i class="fas fa-shopping-bag text-[#2d4fbf]"></i> Pedido de negocio</h2>
             <p class="text-gray-500 text-xs border-b pb-3 mt-2"><span id="cartCountText">0</span> productos</p>
             <div id="cartItemsList" class="space-y-3 my-5 max-h-80 overflow-y-auto pr-1 custom-scroll"></div>
             <div class="flex justify-between items-center border-t pt-4 font-bold text-xl">
                 <span>Total</span>
-                <span id="cartTotalPrice" class="text-blue-700">$0</span>
+                <span id="cartTotalPrice" class="text-[#2d4fbf]">$0</span>
             </div>
             <div class="mt-6 space-y-3">
-                <input type="text" id="orderName" placeholder="Tu nombre *" class="w-full p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-red-500">
-                <input type="text" id="orderPlace" placeholder="Dirección de entrega o punto de referencia *" class="w-full p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-red-500">
-                <textarea id="orderNotes" rows="2" placeholder="Instrucciones (ej. horario de entrega, referencia...)" class="w-full p-3 bg-gray-100 rounded-xl outline-none text-sm"></textarea>
+                <input type="text" id="orderName" placeholder="Tu nombre *" class="w-full p-3 bg-white rounded-xl outline-none border border-[#d7e1ff] focus:ring-2 focus:ring-[#2d4fbf]">
+                <input type="text" id="orderPlace" placeholder="Dirección de entrega o punto de referencia *" class="w-full p-3 bg-white rounded-xl outline-none border border-[#d7e1ff] focus:ring-2 focus:ring-[#2d4fbf]">
+                <textarea id="orderNotes" rows="2" placeholder="Instrucciones (ej. horario de entrega, referencia...)" class="w-full p-3 bg-white rounded-xl outline-none text-sm border border-[#d7e1ff]"></textarea>
                 <div id="orderBtnContainer"></div>
             </div>
         </div>
@@ -243,36 +306,36 @@
             { id: 2, sec: "trapeadores", name: "Trapeador trenzado", priceChico: 50, priceGrande: 600, desc: "Pieza $50 · Docena $600", tag: "🧶 Trenzado" },
             { id: 3, sec: "trapeadores", name: "Trapeador fibra española", priceChico: 80, priceGrande: 960, desc: "Pieza $80 · Docena $960", tag: "🇪🇸 Reforzado" },
             { id: 4, sec: "trapeadores", name: "Trapeador Magiti", priceChico: 30, priceGrande: 360, desc: "Pieza $30 · Docena $360", tag: "💧 Uso diario" },
-            { id: 5, sec: "trapeadores", name: "Trapeador pábilo algodón", priceChico: 40, priceGrande: 480, desc: "Pieza $40 · Docena $480", tag: "🧼 Algodón" },
+            { id: 5, sec: "trapeadores", name: "Trapeador pabilo algodón", priceChico: 40, priceGrande: 480, desc: "Pieza $40 · Docena $480", tag: "🧼 Algodón" },
             { id: 6, sec: "trapeadores", name: "Trapeador payaso", priceChico: 60, priceGrande: 720, desc: "Pieza $60 · Docena $720", tag: "🌈 Colores" },
 
             // Escobas y cepillos
             { id: 7, sec: "escobas", name: "Escoba abanico", priceChico: 39, priceGrande: 468, desc: "Pieza $39 · Docena $468", tag: "🧹 Con bastón" },
             { id: 8, sec: "escobas", name: "Cepillo recto", priceChico: 35, priceGrande: 420, desc: "Pieza $35 · Docena $420", tag: "🪥 Con bastón" },
-            { id: 9, sec: "escobas", name: "Escoba super Lukas", priceChico: 48, priceGrande: 576, desc: "Pieza $48 · Docena $576", tag: "⭐ Mayoreo" },
-            { id: 10, sec: "escobas", name: "Escoba Mega", priceChico: 48, priceGrande: 576, desc: "Pieza $48 · Docena $576", tag: "🏪 Mayoreo" },
-            { id: 11, sec: "escobas", name: "Jalador de agua 50 cm", priceChico: 48, priceGrande: null, desc: "Pieza $48", tag: "🚿 50 cm" },
+            { id: 9, sec: "escobas", name: "Escoba super lukas", priceChico: 48, priceGrande: 576, desc: "Pieza $48 · Docena $576", tag: "⭐ Mayoreo" },
+            { id: 10, sec: "escobas", name: "Escoba mega", priceChico: 48, priceGrande: 576, desc: "Pieza $48 · Docena $576", tag: "🏪 Mayoreo" },
+            { id: 11, sec: "escobas", name: "Jalador agua 50 cm", priceChico: 48, priceGrande: null, desc: "Pieza $48", tag: "🚿 50 cm" },
             { id: 12, sec: "escobas", name: "Recogedor", priceChico: 22, priceGrande: 264, desc: "Pieza $22 · Docena $264", tag: "🗑️ Práctico" },
 
             // Limpieza y baño
-            { id: 13, sec: "limpieza", name: "Borla puff", priceChico: 60, priceGrande: null, desc: "Paquete de 5 por $60", tag: "🛁 Baño" },
-            { id: 14, sec: "limpieza", name: "Tallador multiusos", priceChico: 75, priceGrande: null, desc: "Paquete de 10 por $75", tag: "🧽 Cocina" },
+            { id: 13, sec: "limpieza", name: "Borla puff (paq 5)", priceChico: 60, priceGrande: null, desc: "Paquete de 5 por $60", tag: "🛁 Baño" },
+            { id: 14, sec: "limpieza", name: "Tallador multiusos (paq 10)", priceChico: 75, priceGrande: null, desc: "Paquete de 10 por $75", tag: "🧽 Cocina" },
             { id: 15, sec: "limpieza", name: "Guantes multiusos", priceChico: 25, priceGrande: null, desc: "Pieza $25", tag: "🧤 Protección" },
-            { id: 16, sec: "limpieza", name: "Atomizador con botella", priceChico: 80, priceGrande: null, desc: "Paquete de 4 por $80", tag: "🧴 Spray" },
-            { id: 17, sec: "limpieza", name: "Pistola uso rudo", priceChico: 150, priceGrande: null, desc: "Paquete de 10 por $150", tag: "💦 Repuesto" },
-            { id: 18, sec: "limpieza", name: "Fibra metálica", priceChico: 80, priceGrande: null, desc: "Paquete de 10 por $80", tag: "🔩 Acero" },
-            { id: 19, sec: "limpieza", name: "Esponja carita", priceChico: 150, priceGrande: null, desc: "Paquete de 20 por $150", tag: "🙂 Cocina" },
-            { id: 20, sec: "limpieza", name: "Microfibra toalla", priceChico: 125, priceGrande: null, desc: "Paquete de 10 por $125", tag: "✨ Microfibra" },
+            { id: 16, sec: "limpieza", name: "Atomizador c/botella (paq 4)", priceChico: 80, priceGrande: null, desc: "Paquete de 4 por $80", tag: "🧴 Spray" },
+            { id: 17, sec: "limpieza", name: "Pistola uso rudo (paq 10)", priceChico: 150, priceGrande: null, desc: "Paquete de 10 por $150", tag: "💦 Repuesto" },
+            { id: 18, sec: "limpieza", name: "Fibra metálica (paq 10)", priceChico: 80, priceGrande: null, desc: "Paquete de 10 por $80", tag: "🔩 Acero" },
+            { id: 19, sec: "limpieza", name: "Esponja carita (paq 20)", priceChico: 150, priceGrande: null, desc: "Paquete de 20 por $150", tag: "🙂 Cocina" },
+            { id: 20, sec: "limpieza", name: "Microfibra toalla (paq 10)", priceChico: 125, priceGrande: null, desc: "Paquete de 10 por $125", tag: "✨ Microfibra" },
 
             // Varios
-            { id: 21, sec: "varios", name: "Pinzas", priceChico: 28, priceGrande: 336, desc: "Pieza $28 · Docena $336", tag: "👕 Ropa" },
+            { id: 21, sec: "varios", name: "Pinzas (pza)", priceChico: 28, priceGrande: null, desc: "Pieza $28", tag: "👕 Ropa" },
             { id: 22, sec: "varios", name: "Lazo", priceChico: 25, priceGrande: 300, desc: "Pieza $25 · Docena $300", tag: "🧶 Tendido" },
             { id: 23, sec: "varios", name: "Bomba de baño", priceChico: 30, priceGrande: 360, desc: "Pieza $30 · Docena $360", tag: "🚽 Destapa" },
             { id: 24, sec: "varios", name: "Cepillo plancha", priceChico: 18, priceGrande: 216, desc: "Pieza $18 · Docena $216", tag: "🪥 Lavado" },
-            { id: 25, sec: "varios", name: "Pilas AA (caja c/24)", priceChico: 50, priceGrande: null, desc: "Caja con 24 por $50", tag: "🔋 Electrónica" },
-            { id: 26, sec: "varios", name: "Pilas AAA (caja c/24)", priceChico: 50, priceGrande: null, desc: "Caja con 24 por $50", tag: "🔋 Electrónica" },
-            { id: 27, sec: "varios", name: "Encendedor Eco", priceChico: 165, priceGrande: null, desc: "Caja con 50 por $165", tag: "🔥 Hogar" },
-            { id: 28, sec: "varios", name: "Marcador negro", priceChico: 55, priceGrande: null, desc: "Caja con 10 por $55", tag: "🖊️ Oficina" }
+            { id: 25, sec: "varios", name: "Pilas AA (caja 24)", priceChico: 50, priceGrande: null, desc: "Caja con 24 por $50", tag: "🔋 Electrónica" },
+            { id: 26, sec: "varios", name: "Pilas AAA (caja 24)", priceChico: 50, priceGrande: null, desc: "Caja con 24 por $50", tag: "🔋 Electrónica" },
+            { id: 27, sec: "varios", name: "Encendedor eco (caja 50)", priceChico: 165, priceGrande: null, desc: "Caja con 50 por $165", tag: "🔥 Negocio" },
+            { id: 28, sec: "varios", name: "Marcador negro (caja 10)", priceChico: 55, priceGrande: null, desc: "Caja con 10 por $55", tag: "🖊️ Oficina" }
         ];
 
         const ASSET_BASE_URL = "https://raw.githubusercontent.com/serviciosdigitalesmx/Don-cepillo/main/assets/images/products/";
