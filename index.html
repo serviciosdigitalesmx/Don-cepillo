@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Ming Hui · Comida China & Sushi a Domicilio</title>
+    <title>Don Cepillo · Productos de Limpieza al Mayoreo</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -20,7 +20,7 @@
         .bg-pattern { background-image: radial-gradient(rgba(185,28,28,0.05) 1.5px, transparent 1.5px); background-size: 28px 28px; }
         .hero-bg {
             background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.6) 100%), 
-                        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=1500');
+                        url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=1500');
             background-size: cover; background-position: center;
         }
         .modal-overlay { 
@@ -66,7 +66,7 @@
 </head>
 <body class="antialiased bg-pattern">
 
-    <div id="toast" class="toast"><i class="fas fa-dragon text-red-400"></i><span id="toastMessage">Agregado al pedido</span></div>
+    <div id="toast" class="toast"><i class="fas fa-broom text-emerald-400"></i><span id="toastMessage">Agregado al pedido</span></div>
 
     <!-- Carrito flotante móvil -->
     <div id="floatingCart" class="floating-cart md:hidden">
@@ -80,10 +80,10 @@
     <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
         <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'}); logActivity('Click Logo')">
-                <div class="w-9 h-9 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">M</div>
+                <div class="w-9 h-9 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">D</div>
                 <div>
-                    <span class="text-xl font-black tracking-tight text-white">Ming Hui</span>
-                    <span class="text-red-500 text-[8px] font-bold uppercase block leading-none">China · Sushi</span>
+                    <span class="text-xl font-black tracking-tight text-white">Don Cepillo</span>
+                    <span class="text-emerald-400 text-[8px] font-bold uppercase block leading-none">Fábrica de trapeadores</span>
                 </div>
             </div>
             <button onclick="openCartModal(); logActivity('Abrir Carrito')" class="relative text-white">
@@ -97,10 +97,10 @@
     <section class="hero-bg min-h-[85vh] flex items-center justify-center text-center px-4 relative">
         <div class="absolute inset-0 bg-gradient-to-t from-[#1f1a15] via-transparent to-transparent"></div>
         <div class="max-w-3xl relative z-10">
-            <span class="text-red-400 text-xs tracking-[0.3em] block mb-3 font-semibold">SABOR ORIENTAL · ENTREGA RÁPIDA</span>
-            <h1 class="text-5xl md:text-7xl font-black text-white drop-shadow-2xl leading-tight">Lo mejor de <span class="text-red-500">China</span> y <span class="text-amber-500">Sushi</span></h1>
-            <p class="text-gray-200 mt-6 max-w-xl mx-auto">Rollos frescos, platos tradicionales y combos especiales. ¡Pide desde casa!</p>
-            <button onclick="openMenuModal(); logActivity('Abrir Menú')" class="mt-8 bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-bold uppercase tracking-wide transition shadow-xl text-sm">Ver menú y pedir ahora</button>
+            <span class="text-emerald-300 text-xs tracking-[0.3em] block mb-3 font-semibold">PRODUCTOS DE LIMPIEZA · PRECIOS DE MAYOREO</span>
+            <h1 class="text-5xl md:text-7xl font-black text-white drop-shadow-2xl leading-tight">Todo para tu <span class="text-emerald-400">limpieza</span> y <span class="text-amber-400">hogar</span></h1>
+            <p class="text-gray-200 mt-6 max-w-xl mx-auto">Trapeadores, escobas, fibras, esponjas y más. Levanta tu pedido por pieza, paquete o docena.</p>
+            <button onclick="openMenuModal(); logActivity('Abrir Catálogo')" class="mt-8 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-full font-bold uppercase tracking-wide transition shadow-xl text-sm">Ver catálogo y cotizar</button>
         </div>
     </section>
 
@@ -109,25 +109,25 @@
         <div id="menuContainer" class="bg-white w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl relative custom-scroll">
             <div class="sticky top-0 bg-white/95 backdrop-blur-sm px-6 py-4 border-b border-gray-200 flex justify-between items-center z-20">
                 <div class="flex items-center gap-2">
-                    <i class="fas fa-utensils text-red-600 text-xl"></i>
-                    <h2 class="text-2xl font-bold text-gray-800">Nuestro menú</h2>
+                    <i class="fas fa-soap text-emerald-600 text-xl"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">Nuestro catálogo</h2>
                 </div>
                 <button onclick="closeModal('menuModal')" class="text-gray-400 hover:text-red-600 text-2xl"><i class="fas fa-times-circle"></i></button>
             </div>
             <div class="p-6">
                 <!-- Filtros -->
                 <div id="filterBar" class="sticky top-16 z-30 bg-white/90 backdrop-blur-sm py-3 flex flex-wrap gap-2 border-b border-gray-100 mb-6">
-                    <button onclick="filterCategory('all', this); logActivity('Filtrar: Todo')" class="filter-btn active bg-red-600 text-white text-[10px] font-bold px-5 py-2 rounded-full">🍜 Todo</button>
-                    <button onclick="filterCategory('china', this); logActivity('Filtrar: China')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🥡 China</button>
-                    <button onclick="filterCategory('sushi', this); logActivity('Filtrar: Sushi')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🍣 Sushi</button>
-                    <button onclick="filterCategory('guisos', this); logActivity('Filtrar: Guisos')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🍲 Guisos</button>
-                    <button onclick="filterCategory('extras', this); logActivity('Filtrar: Extras')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🥟 Extras</button>
+                    <button onclick="filterCategory('all', this); logActivity('Filtrar: Todo')" class="filter-btn active bg-red-600 text-white text-[10px] font-bold px-5 py-2 rounded-full">🧽 Todo</button>
+                    <button onclick="filterCategory('trapeadores', this); logActivity('Filtrar: Trapeadores')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🪣 Trapeadores</button>
+                    <button onclick="filterCategory('escobas', this); logActivity('Filtrar: Escobas')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🧹 Escobas</button>
+                    <button onclick="filterCategory('limpieza', this); logActivity('Filtrar: Limpieza')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🧴 Limpieza</button>
+                    <button onclick="filterCategory('varios', this); logActivity('Filtrar: Varios')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">📦 Varios</button>
                 </div>
 
                 <div id="menuContent" class="space-y-10"></div>
                 
                 <div class="text-center mt-8">
-                    <button onclick="openCartModal(); logActivity('Ver Pedido desde Menú')" class="bg-red-600 text-white px-8 py-3 rounded-full font-bold shadow-md hover:bg-red-700 transition"><i class="fas fa-shopping-cart mr-2"></i> Ver mi pedido</button>
+                    <button onclick="openCartModal(); logActivity('Ver Pedido desde Catálogo')" class="bg-emerald-600 text-white px-8 py-3 rounded-full font-bold shadow-md hover:bg-emerald-700 transition"><i class="fas fa-shopping-cart mr-2"></i> Ver mi pedido</button>
                 </div>
             </div>
         </div>
@@ -136,13 +136,13 @@
     <!-- MODAL PRODUCTO (NOTAS) -->
     <div id="productModal" class="modal-overlay p-4">
         <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl overflow-hidden">
-            <div class="h-32 bg-red-50 flex items-center justify-center"><i class="fas fa-dragon text-5xl text-red-300"></i></div>
+            <div class="h-32 bg-emerald-50 flex items-center justify-center"><i class="fas fa-pump-soap text-5xl text-emerald-300"></i></div>
             <div class="p-6">
                 <button onclick="closeModal('productModal')" class="float-right text-gray-400 hover:text-red-600"><i class="fas fa-times text-xl"></i></button>
                 <h3 id="modalProductName" class="text-2xl font-bold text-gray-800 mb-1">Producto</h3>
                 <p id="modalProductPrice" class="text-red-600 font-bold text-xl mb-4">$0</p>
                 <label class="block text-xs font-bold uppercase text-gray-500 mb-2">Notas especiales</label>
-                <textarea id="productNotes" rows="2" class="w-full border border-gray-200 rounded-xl p-3 text-sm focus:ring-2 focus:ring-red-500/50 outline-none" placeholder="Ej. Sin picante, extra salsa de soya..."></textarea>
+                <textarea id="productNotes" rows="2" class="w-full border border-gray-200 rounded-xl p-3 text-sm focus:ring-2 focus:ring-red-500/50 outline-none" placeholder="Ej. color surtido, marca sugerida, tipo de uso..."></textarea>
                 <div class="flex justify-between items-center mt-5">
                     <div class="flex items-center gap-3 bg-gray-100 rounded-full px-4 py-1">
                         <button onclick="updateModalQty(-1)" class="w-8 h-8 text-xl font-bold">-</button>
@@ -168,8 +168,8 @@
             </div>
             <div class="mt-6 space-y-3">
                 <input type="text" id="orderName" placeholder="Tu nombre *" class="w-full p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-red-500">
-                <input type="text" id="orderPlace" placeholder="Dirección (colonia, calle, número) *" class="w-full p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-red-500">
-                <textarea id="orderNotes" rows="2" placeholder="Instrucciones (ej. tocar timbre, piso...)" class="w-full p-3 bg-gray-100 rounded-xl outline-none text-sm"></textarea>
+                <input type="text" id="orderPlace" placeholder="Dirección de entrega o punto de referencia *" class="w-full p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 focus:ring-red-500">
+                <textarea id="orderNotes" rows="2" placeholder="Instrucciones (ej. horario de entrega, referencia...)" class="w-full p-3 bg-gray-100 rounded-xl outline-none text-sm"></textarea>
                 <div id="orderBtnContainer"></div>
             </div>
         </div>
@@ -178,13 +178,13 @@
     <script>
         // ================= CONFIGURACIÓN NEGOCIO =================
         const CONFIG = {
-            name: "Ming Hui",
-            whatsapp: "528114973226",
-            openHour: 12,      // 12:00 PM (MEDIODÍA)
-            closeHour: 22,     // 10:00 PM
-            deliveryTime: "35-50 min",
-            deliveryZone: "Cerca de Universidad, Centro y zonas aledañas",
-            storageKey: 'minghui_cart',
+            name: "Don Cepillo",
+            whatsapp: "528128703965",
+            openHour: 8,
+            closeHour: 20,
+            deliveryTime: "Entrega a coordinar por WhatsApp",
+            deliveryZone: "Níspero #1125, Col. Laderas de San Miguel, 3er Sector, Escobedo N.L.",
+            storageKey: 'doncepillo_cart',
             currency: 'MXN'
         };
 
@@ -238,22 +238,41 @@
 
         // ================= MENÚ COMPLETO =================
         const menuData = [
-            // China (platos chicos/grandes)
-            { id: 1, sec: "china", name: "Pollo con Brócoli", priceChico: 95, priceGrande: 140, desc: "Salteado con salsa de ostión", tag: "🌶️ Clásico" },
-            { id: 2, sec: "china", name: "Carne al Estilo Mongol", priceChico: 110, priceGrande: 165, desc: "Con cebolla y chile morrón", tag: "🔥 Popular" },
-            { id: 3, sec: "china", name: "Chow Mein de Pollo", priceChico: 90, priceGrande: 135, desc: "Fideo saltado con verduras", tag: "🍜 Fideo" },
-            { id: 4, sec: "china", name: "Arroz Fuego Oriental", priceChico: 85, priceGrande: 125, desc: "Arroz frito con huevo y vegetales", tag: "🍚 Arroz" },
-            { id: 5, sec: "china", name: "Camarón con Salsa Agridulce", priceChico: 130, priceGrande: 190, desc: "Camarón grande empanizado", tag: "🍤 Premium" },
-            // Sushi
-            { id: 6, sec: "sushi", name: "Roll California", priceChico: 75, priceGrande: null, desc: "8 piezas de aguacate, pepino y cangrejo", tag: "🍣 Clásico" },
-            { id: 7, sec: "sushi", name: "Roll Empanizado (Filadelfia)", priceChico: 95, priceGrande: null, desc: "Salmon, queso crema, crujiente", tag: "🔥 Tempura" },
-            { id: 8, sec: "sushi", name: "Sushi Mix (12 pzas)", priceChico: 150, priceGrande: null, desc: "Variedad de rollos fríos y empanizados", tag: "⭐ Surtido" },
-            // Guisos
-            { id: 9, sec: "guisos", name: "Pollo en Salsa Roja", priceChico: 85, priceGrande: 125, desc: "Con verduras, porción individual", tag: "🍲 Guisado" },
-            { id: 10, sec: "guisos", name: "Milanesa de Pollo", priceChico: 90, priceGrande: 135, desc: "Acompañada de arroz y ensalada", tag: "🍗 Crujiente" },
-            // Extras
-            { id: 11, sec: "extras", name: "Rollos Primavera (4 pzas)", priceChico: 60, priceGrande: null, desc: "Rellenos de verduras", tag: "🥟 Entrada" },
-            { id: 12, sec: "extras", name: "Queso Relleno de Camarón", priceChico: 85, priceGrande: null, desc: "Gratinado con camarón", tag: "🧀 Especial" }
+            // Trapeadores
+            { id: 1, sec: "trapeadores", name: "Trapeador hilaza", priceChico: 46, priceGrande: 552, desc: "Pieza $46 · Docena $552", tag: "🧵 Hilo suave" },
+            { id: 2, sec: "trapeadores", name: "Trapeador trenzado", priceChico: 50, priceGrande: 600, desc: "Pieza $50 · Docena $600", tag: "🧶 Trenzado" },
+            { id: 3, sec: "trapeadores", name: "Trapeador fibra española", priceChico: 80, priceGrande: 960, desc: "Pieza $80 · Docena $960", tag: "🇪🇸 Reforzado" },
+            { id: 4, sec: "trapeadores", name: "Trapeador Magiti", priceChico: 30, priceGrande: 360, desc: "Pieza $30 · Docena $360", tag: "💧 Uso diario" },
+            { id: 5, sec: "trapeadores", name: "Trapeador pábilo algodón", priceChico: 40, priceGrande: 480, desc: "Pieza $40 · Docena $480", tag: "🧼 Algodón" },
+            { id: 6, sec: "trapeadores", name: "Trapeador payaso", priceChico: 60, priceGrande: 720, desc: "Pieza $60 · Docena $720", tag: "🌈 Colores" },
+
+            // Escobas y cepillos
+            { id: 7, sec: "escobas", name: "Escoba abanico", priceChico: 39, priceGrande: 468, desc: "Pieza $39 · Docena $468", tag: "🧹 Con bastón" },
+            { id: 8, sec: "escobas", name: "Cepillo recto", priceChico: 35, priceGrande: 420, desc: "Pieza $35 · Docena $420", tag: "🪥 Con bastón" },
+            { id: 9, sec: "escobas", name: "Escoba super Lukas", priceChico: 48, priceGrande: 576, desc: "Pieza $48 · Docena $576", tag: "⭐ Mayoreo" },
+            { id: 10, sec: "escobas", name: "Escoba Mega", priceChico: 48, priceGrande: 576, desc: "Pieza $48 · Docena $576", tag: "🏪 Mayoreo" },
+            { id: 11, sec: "escobas", name: "Jalador de agua 50 cm", priceChico: 48, priceGrande: null, desc: "Pieza $48", tag: "🚿 50 cm" },
+            { id: 12, sec: "escobas", name: "Recogedor", priceChico: 22, priceGrande: 264, desc: "Pieza $22 · Docena $264", tag: "🗑️ Práctico" },
+
+            // Limpieza y baño
+            { id: 13, sec: "limpieza", name: "Borla puff", priceChico: 60, priceGrande: null, desc: "Paquete de 5 por $60", tag: "🛁 Baño" },
+            { id: 14, sec: "limpieza", name: "Tallador multiusos", priceChico: 75, priceGrande: null, desc: "Paquete de 10 por $75", tag: "🧽 Cocina" },
+            { id: 15, sec: "limpieza", name: "Guantes multiusos", priceChico: 25, priceGrande: null, desc: "Pieza $25", tag: "🧤 Protección" },
+            { id: 16, sec: "limpieza", name: "Atomizador con botella", priceChico: 80, priceGrande: null, desc: "Paquete de 4 por $80", tag: "🧴 Spray" },
+            { id: 17, sec: "limpieza", name: "Pistola uso rudo", priceChico: 150, priceGrande: null, desc: "Paquete de 10 por $150", tag: "💦 Repuesto" },
+            { id: 18, sec: "limpieza", name: "Fibra metálica", priceChico: 80, priceGrande: null, desc: "Paquete de 10 por $80", tag: "🔩 Acero" },
+            { id: 19, sec: "limpieza", name: "Esponja carita", priceChico: 150, priceGrande: null, desc: "Paquete de 20 por $150", tag: "🙂 Cocina" },
+            { id: 20, sec: "limpieza", name: "Microfibra toalla", priceChico: 125, priceGrande: null, desc: "Paquete de 10 por $125", tag: "✨ Microfibra" },
+
+            // Varios
+            { id: 21, sec: "varios", name: "Pinzas", priceChico: 28, priceGrande: 336, desc: "Pieza $28 · Docena $336", tag: "👕 Ropa" },
+            { id: 22, sec: "varios", name: "Lazo", priceChico: 25, priceGrande: 300, desc: "Pieza $25 · Docena $300", tag: "🧶 Tendido" },
+            { id: 23, sec: "varios", name: "Bomba de baño", priceChico: 30, priceGrande: 360, desc: "Pieza $30 · Docena $360", tag: "🚽 Destapa" },
+            { id: 24, sec: "varios", name: "Cepillo plancha", priceChico: 18, priceGrande: 216, desc: "Pieza $18 · Docena $216", tag: "🪥 Lavado" },
+            { id: 25, sec: "varios", name: "Pilas AA (caja c/24)", priceChico: 50, priceGrande: null, desc: "Caja con 24 por $50", tag: "🔋 Electrónica" },
+            { id: 26, sec: "varios", name: "Pilas AAA (caja c/24)", priceChico: 50, priceGrande: null, desc: "Caja con 24 por $50", tag: "🔋 Electrónica" },
+            { id: 27, sec: "varios", name: "Encendedor Eco", priceChico: 165, priceGrande: null, desc: "Caja con 50 por $165", tag: "🔥 Hogar" },
+            { id: 28, sec: "varios", name: "Marcador negro", priceChico: 55, priceGrande: null, desc: "Caja con 10 por $55", tag: "🖊️ Oficina" }
         ];
 
         let cartItems = JSON.parse(localStorage.getItem(CONFIG.storageKey)) || [];
@@ -321,7 +340,7 @@
                     totalItems += item.qty;
                     totalMoney += subtotal;
                     return `<div class="bg-gray-50 p-3 rounded-xl border">
-                                <div class="flex justify-between"><span class="font-bold">${product.name} (${item.size === 'grande' ? 'Grande' : 'Chico'})</span><span class="text-red-600 font-bold">${formatter.format(subtotal)}</span></div>
+                                <div class="flex justify-between"><span class="font-bold">${product.name} (${item.size === 'grande' ? 'Docena' : 'Pieza'})</span><span class="text-red-600 font-bold">${formatter.format(subtotal)}</span></div>
                                 ${item.notes ? `<p class="text-xs text-amber-600 mt-1">📝 "${item.notes}"</p>` : ''}
                                 <div class="flex justify-between items-center mt-2">
                                     <div class="flex items-center gap-2 bg-white rounded-full border px-2 py-1">
@@ -369,7 +388,7 @@
         }
 
         function renderMenu() {
-            const sectionsMap = { china: "🥡 Cocina China", sushi: "🍣 Sushi Especial", guisos: "🍲 Guisos y Platillos", extras: "🥟 Extras y Entradas" };
+            const sectionsMap = { trapeadores: "🪣 Trapeadores", escobas: "🧹 Escobas y cepillos", limpieza: "🧼 Limpieza y baño", varios: "📦 Varios" };
             let keys = activeCategory === 'all' ? Object.keys(sectionsMap) : [activeCategory];
             const container = document.getElementById('menuContent');
             if (!container) return;
@@ -384,8 +403,8 @@
                                             <div class="flex items-center gap-2"><span class="font-bold text-gray-800">${product.name}</span>${product.tag ? `<span class="text-[8px] bg-red-100 text-red-700 px-2 py-0.5 rounded-full">${product.tag}</span>` : ''}</div>
                                             <p class="text-gray-500 text-xs mt-0.5">${product.desc}</p>
                                             <div class="flex gap-3 mt-2 text-sm font-bold">
-                                                <span class="text-red-600">Chico ${formatter.format(product.priceChico)}</span>
-                                                ${hasGrande ? `<span class="text-gray-600">Grande ${formatter.format(product.priceGrande)}</span>` : ''}
+                                                <span class="text-red-600">Pieza ${formatter.format(product.priceChico)}</span>
+                                                ${hasGrande ? `<span class="text-gray-600">Docena ${formatter.format(product.priceGrande)}</span>` : ''}
                                             </div>
                                         </div>
                                         <button class="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-red-700"><i class="fas fa-plus text-sm"></i></button>
@@ -402,7 +421,7 @@
             currentModalQty = 1;
             currentSize = currentProduct.priceGrande ? 'chico' : 'chico';
             document.getElementById('modalProductName').innerText = currentProduct.name;
-            document.getElementById('modalProductPrice').innerHTML = `<span class="flex gap-3 items-center"><span class="cursor-pointer ${currentSize === 'chico' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('chico')">Chico ${formatter.format(currentProduct.priceChico)}</span>${currentProduct.priceGrande ? `<span class="cursor-pointer ${currentSize === 'grande' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('grande')">Grande ${formatter.format(currentProduct.priceGrande)}</span>` : ''}</span>`;
+            document.getElementById('modalProductPrice').innerHTML = `<span class="flex gap-3 items-center"><span class="cursor-pointer ${currentSize === 'chico' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('chico')">Pieza ${formatter.format(currentProduct.priceChico)}</span>${currentProduct.priceGrande ? `<span class="cursor-pointer ${currentSize === 'grande' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('grande')">Docena ${formatter.format(currentProduct.priceGrande)}</span>` : ''}</span>`;
             document.getElementById('productNotes').value = '';
             updateModalQty(0);
             document.getElementById('productModal').classList.add('active');
@@ -417,7 +436,7 @@
                     qty: currentModalQty,
                     size: currentSize
                 });
-                showToast(`+ ${currentModalQty}x ${currentProduct.name} (${currentSize === 'grande' ? 'Grande' : 'Chico'})`);
+                showToast(`+ ${currentModalQty}x ${currentProduct.name} (${currentSize === 'grande' ? 'Docena' : 'Pieza'})`);
                 closeModal('productModal');
             };
         }
@@ -425,7 +444,7 @@
         function setSizeAndUpdate(size) { 
             currentSize = size; 
             if (currentProduct) { 
-                document.getElementById('modalProductPrice').innerHTML = `<span class="flex gap-3 items-center"><span class="cursor-pointer ${size === 'chico' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('chico')">Chico ${formatter.format(currentProduct.priceChico)}</span>${currentProduct.priceGrande ? `<span class="cursor-pointer ${size === 'grande' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('grande')">Grande ${formatter.format(currentProduct.priceGrande)}</span>` : ''}</span>`; 
+                document.getElementById('modalProductPrice').innerHTML = `<span class="flex gap-3 items-center"><span class="cursor-pointer ${size === 'chico' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('chico')">Pieza ${formatter.format(currentProduct.priceChico)}</span>${currentProduct.priceGrande ? `<span class="cursor-pointer ${size === 'grande' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('grande')">Docena ${formatter.format(currentProduct.priceGrande)}</span>` : ''}</span>`; 
                 updateModalQty(0); 
             } 
         }
@@ -448,7 +467,7 @@
             let notes = document.getElementById('orderNotes')?.value.trim();
             
             if (!name || !addr) { 
-                alert("❌ Por favor ingresa tu nombre y dirección.");
+                alert("❌ Por favor ingresa tu nombre y la dirección o referencia de entrega.");
                 return; 
             }
             
@@ -463,7 +482,7 @@
                 return {
                     name: p.name,
                     qty: item.qty,
-                    size: item.size === 'grande' ? 'Grande' : 'Chico',
+                    size: item.size === 'grande' ? 'Docena' : 'Pieza',
                     notes: item.notes || '',
                     price: getProductPrice(p, item.size),
                     subtotal: getProductPrice(p, item.size) * item.qty
@@ -495,7 +514,7 @@
             });
 
             // Construir mensaje de WhatsApp
-            let msg = `*🍜 ${CONFIG.name} - NUEVO PEDIDO*%0A`;
+            let msg = `*🧽 ${CONFIG.name} - NUEVO PEDIDO*%0A`;
             msg += `*Cliente:* ${name}%0A`;
             msg += `*Dirección:* ${addr}%0A`;
             msg += `*Zona:* ${CONFIG.deliveryZone}%0A%0A`;
@@ -505,7 +524,7 @@
                 let p = menuData.find(m => m.id === item.id);
                 let price = getProductPrice(p, item.size);
                 let sub = price * item.qty;
-                msg += `▫️ ${item.qty}x ${p.name} (${item.size === 'grande' ? 'Grande' : 'Chico'})`;
+                msg += `▫️ ${item.qty}x ${p.name} (${item.size === 'grande' ? 'Docena' : 'Pieza'})`;
                 if (item.notes) msg += ` [📝 ${item.notes}]`;
                 msg += ` = *${formatter.format(sub)}*%0A`;
             });
@@ -521,7 +540,7 @@
             cartItems = [];
             saveCart();
             closeModal('cartModal');
-            showToast("✅ Pedido enviado por WhatsApp");
+            showToast("✅ Pedido enviado para cotización por WhatsApp");
         }
 
         function openMenuModal() { 
