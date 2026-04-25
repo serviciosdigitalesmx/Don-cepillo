@@ -70,6 +70,13 @@
             pointer-events: none;
             user-select: none;
         }
+        .hero-badge {
+            pointer-events: none;
+            user-select: none;
+            box-shadow: none;
+            border: 0;
+            cursor: default;
+        }
         .poster-stripe {
             background: linear-gradient(90deg, var(--primary-yellow), #f7e981);
         }
@@ -163,15 +170,15 @@
         <div class="max-w-4xl relative z-10 hero-card rounded-[2rem] md:rounded-[2.5rem] px-6 py-10 md:px-12 md:py-14">
             <span class="text-[#f2de57] text-xs tracking-[0.35em] block mb-4 font-bold uppercase">Venta al mayoreo para negocios</span>
             <div class="flex flex-col items-center gap-5">
-                <img src="/assets/branding/don-cepillo-logo.svg" alt="Don Cepillo" class="w-56 max-w-[72vw] h-auto">
+                <img src="/assets/branding/don-cepillo-logo.svg" alt="Don Cepillo" class="w-48 md:w-56 max-w-[72vw] h-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.25)]">
             </div>
             <p class="text-white/90 mt-5 max-w-2xl mx-auto text-base md:text-lg font-medium">
                 Trapeadores, escobas, fibras, esponjas y accesorios para tiendas, restaurantes, hoteles, oficinas y distribuidores.
             </p>
             <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-                <span class="bg-white/15 text-white px-4 py-2 rounded-full border border-white/20 text-sm font-semibold">Negocios</span>
-                <span class="bg-[#f2de57] text-[#1d2f84] px-4 py-2 rounded-full border border-[#f2de57] text-sm font-black">Pedido rápido</span>
-                <span class="bg-[#ef4444] text-white px-4 py-2 rounded-full border border-white/15 text-sm font-semibold">Atención por WhatsApp</span>
+                <span class="hero-badge bg-white/12 text-white px-4 py-2 rounded-full text-sm font-semibold">Negocios</span>
+                <span class="hero-badge bg-[#f2de57] text-[#1d2f84] px-4 py-2 rounded-full text-sm font-black">Pedido rápido</span>
+                <span class="hero-badge bg-[#ef4444] text-white px-4 py-2 rounded-full text-sm font-semibold">Atención por WhatsApp</span>
             </div>
             <button onclick="openMenuModal(); logActivity('Abrir Catálogo')" class="mt-8 bg-[#f2de57] hover:bg-[#ffe96f] text-[#1d2f84] px-8 py-4 rounded-full font-black uppercase tracking-wide transition shadow-xl text-sm">
                 Ver catálogo y cotizar
@@ -182,10 +189,10 @@
     <!-- MODAL MENÚ PRINCIPAL -->
     <div id="menuModal" class="modal-overlay p-4">
         <div id="menuContainer" class="bg-[#f4f7ff] w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl relative custom-scroll">
-            <div class="sticky top-0 bg-[#1d2f84]/96 backdrop-blur-sm px-6 py-4 border-b border-[#f2de57]/35 flex justify-between items-center z-20">
+            <div class="sticky top-0 bg-[#1d2f84] backdrop-blur-sm px-6 py-4 border-b-4 border-[#f2de57] flex justify-between items-center z-20">
                 <div class="flex items-center gap-2">
                     <i class="fas fa-soap text-[#f2de57] text-xl"></i>
-                    <h2 class="text-2xl font-black text-white brand-font">Catálogo para negocios</h2>
+                    <h2 class="text-2xl md:text-3xl font-black text-white brand-font drop-shadow-sm">Catálogo para negocios</h2>
                 </div>
                 <button onclick="closeModal('menuModal')" class="text-white/80 hover:text-[#f2de57] text-2xl"><i class="fas fa-times-circle"></i></button>
             </div>
