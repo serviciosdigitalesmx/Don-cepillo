@@ -11,14 +11,13 @@
     
     <style>
         :root { 
-            --primary-blue: #1a365d;
-            --accent-yellow: #ecc94b;
-            --secondary-blue: #63b3ed;
-            --text-dark: #2d3748;
-            --light-bg: #f7fafc;
+            --primary-red: #1d4ed8; /* azul tarjeta */
+            --primary-gold: #facc15; /* amarillo tarjeta */
+            --dark-bg: #0b1533;
+            --light-bg: #f4f8ff;
         }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--primary-blue); color: var(--text-dark); scroll-behavior: smooth; }
-        .bg-pattern { background-image: radial-gradient(rgba(99,179,237,0.18) 1.5px, transparent 1.5px); background-size: 28px 28px; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--dark-bg); color: #2c2418; scroll-behavior: smooth; }
+        .bg-pattern { background-image: radial-gradient(rgba(29,78,216,0.12) 1.5px, transparent 1.5px); background-size: 28px 28px; }
         .hero-bg {
             background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.6) 100%), 
                         url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=1500');
@@ -33,13 +32,10 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
         .filter-btn { transition: all 0.2s ease; cursor: pointer; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
-        .filter-btn.active { background: var(--accent-yellow) !important; color: var(--text-dark) !important; border-color: var(--accent-yellow) !important; box-shadow: 0 4px 12px rgba(236,201,75,0.35);}
+        .filter-btn.active { background: var(--primary-red) !important; color: white !important; border-color: var(--primary-red) !important; box-shadow: 0 4px 12px rgba(29,78,216,0.4);}
         
-        .menu-item-card { transition: all 0.2s; cursor: pointer; background: #ffffff; border: 1px solid rgba(99,179,237,0.35); border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); overflow: hidden; }
-        .menu-item-card:hover { border-color: var(--secondary-blue); transform: translateY(-2px); }
-        .docena-badge { background: var(--accent-yellow); color: var(--text-dark); font-weight: 700; padding: 4px 10px; border-radius: 9999px; font-size: 12px; }
-        .cta-btn { background: var(--accent-yellow); color: var(--text-dark); padding: 12px 24px; border-radius: 9999px; font-weight: 700; box-shadow: 0 6px 14px rgba(0,0,0,0.15); }
-        .cta-btn:hover { filter: brightness(0.95); }
+        .menu-item-card { transition: all 0.2s; cursor: pointer; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
+        .menu-item-card:hover { border-color: var(--primary-gold); transform: translateY(-2px); background: rgba(255,255,255,0.06); }
         
         .toast {
             position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px);
@@ -74,20 +70,20 @@
 
     <!-- Carrito flotante móvil -->
     <div id="floatingCart" class="floating-cart md:hidden">
-        <button onclick="openCartModal()" class="w-full cta-btn py-4 rounded-2xl font-bold flex justify-between px-6 items-center">
+        <button onclick="openCartModal()" class="w-full bg-gradient-to-r from-blue-700 to-blue-800 text-white py-4 rounded-2xl shadow-xl font-bold flex justify-between px-6 items-center border border-white/20">
             <span><i class="fas fa-shopping-bag mr-2"></i> Ver pedido</span>
             <span id="floatTotal" class="bg-black/30 px-4 py-1 rounded-full text-sm">$0</span>
         </button>
     </div>
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-[#1a365d]/95 backdrop-blur-md border-b border-sky-200/20">
+    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
         <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'}); logActivity('Click Logo')">
                 <div class="w-9 h-9 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">D</div>
                 <div>
                     <span class="text-xl font-black tracking-tight text-white">Don Cepillo</span>
-                    <span class="text-sky-300 text-[8px] font-bold uppercase block leading-none">Fábrica de trapeadores</span>
+                    <span class="text-emerald-400 text-[8px] font-bold uppercase block leading-none">Fábrica de trapeadores</span>
                 </div>
             </div>
             <button onclick="openCartModal(); logActivity('Abrir Carrito')" class="relative text-white">
@@ -101,10 +97,10 @@
     <section class="hero-bg min-h-[85vh] flex items-center justify-center text-center px-4 relative">
         <div class="absolute inset-0 bg-gradient-to-t from-[#1f1a15] via-transparent to-transparent"></div>
         <div class="max-w-3xl relative z-10">
-            <span class="text-sky-300 text-xs tracking-[0.3em] block mb-3 font-semibold">PRODUCTOS DE LIMPIEZA · PRECIOS DE MAYOREO</span>
-            <h1 class="text-5xl md:text-7xl font-black text-white drop-shadow-2xl leading-tight">Todo para tu <span class="text-yellow-300">negocio</span> y hogar</h1>
+            <span class="text-emerald-300 text-xs tracking-[0.3em] block mb-3 font-semibold">PRODUCTOS DE LIMPIEZA · PRECIOS DE MAYOREO</span>
+            <h1 class="text-5xl md:text-7xl font-black text-white drop-shadow-2xl leading-tight">Todo para tu <span class="text-emerald-400">limpieza</span> y <span class="text-amber-400">hogar</span></h1>
             <p class="text-gray-200 mt-6 max-w-xl mx-auto">Trapeadores, escobas, fibras, esponjas y más. Levanta tu pedido por pieza, paquete o docena.</p>
-            <button onclick="openMenuModal(); logActivity('Abrir Catálogo')" class="mt-8 cta-btn uppercase tracking-wide transition text-sm">Ver catálogo y cotizar</button>
+            <button onclick="openMenuModal(); logActivity('Abrir Catálogo')" class="mt-8 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-full font-bold uppercase tracking-wide transition shadow-xl text-sm">Ver catálogo y cotizar</button>
         </div>
     </section>
 
@@ -113,7 +109,7 @@
         <div id="menuContainer" class="bg-white w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl relative custom-scroll">
             <div class="sticky top-0 bg-white/95 backdrop-blur-sm px-6 py-4 border-b border-gray-200 flex justify-between items-center z-20">
                 <div class="flex items-center gap-2">
-                    <i class="fas fa-soap text-sky-600 text-xl"></i>
+                    <i class="fas fa-soap text-emerald-600 text-xl"></i>
                     <h2 class="text-2xl font-bold text-gray-800">Nuestro catálogo</h2>
                 </div>
                 <button onclick="closeModal('menuModal')" class="text-gray-400 hover:text-blue-600 text-2xl"><i class="fas fa-times-circle"></i></button>
@@ -121,16 +117,17 @@
             <div class="p-6">
                 <!-- Filtros -->
                 <div id="filterBar" class="sticky top-16 z-30 bg-white/90 backdrop-blur-sm py-3 flex flex-wrap gap-2 border-b border-gray-100 mb-6">
-                    <button onclick="filterCategory('all', this); logActivity('Filtrar: Todo')" class="filter-btn active text-[10px] font-bold px-5 py-2 rounded-full">🧽 Todo</button>
+                    <button onclick="filterCategory('all', this); logActivity('Filtrar: Todo')" class="filter-btn active bg-red-600 text-white text-[10px] font-bold px-5 py-2 rounded-full">🧽 Todo</button>
                     <button onclick="filterCategory('trapeadores', this); logActivity('Filtrar: Trapeadores')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🪣 Trapeadores</button>
                     <button onclick="filterCategory('escobas', this); logActivity('Filtrar: Escobas')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🧹 Escobas</button>
+                    <button onclick="filterCategory('limpieza', this); logActivity('Filtrar: Limpieza')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">🧴 Limpieza</button>
                     <button onclick="filterCategory('varios', this); logActivity('Filtrar: Varios')" class="filter-btn text-gray-600 text-[10px] font-bold px-5 py-2 rounded-full">📦 Varios</button>
                 </div>
 
                 <div id="menuContent" class="space-y-10"></div>
                 
                 <div class="text-center mt-8">
-                    <button onclick="openCartModal(); logActivity('Ver Pedido desde Catálogo')" class="cta-btn"><i class="fas fa-shopping-cart mr-2"></i> Ver mi pedido</button>
+                    <button onclick="openCartModal(); logActivity('Ver Pedido desde Catálogo')" class="bg-emerald-600 text-white px-8 py-3 rounded-full font-bold shadow-md hover:bg-emerald-700 transition"><i class="fas fa-shopping-cart mr-2"></i> Ver mi pedido</button>
                 </div>
             </div>
         </div>
@@ -139,9 +136,7 @@
     <!-- MODAL PRODUCTO (NOTAS) -->
     <div id="productModal" class="modal-overlay p-4">
         <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl overflow-hidden">
-            <div class="h-44 bg-emerald-50 flex items-center justify-center overflow-hidden">
-                <img id="modalProductImage" src="" alt="Producto" class="w-full h-full object-cover">
-            </div>
+            <div class="h-32 bg-emerald-50 flex items-center justify-center"><i class="fas fa-pump-soap text-5xl text-emerald-300"></i></div>
             <div class="p-6">
                 <button onclick="closeModal('productModal')" class="float-right text-gray-400 hover:text-blue-600"><i class="fas fa-times text-xl"></i></button>
                 <h3 id="modalProductName" class="text-2xl font-bold text-gray-800 mb-1">Producto</h3>
@@ -317,10 +312,16 @@
             27: "https://loremflickr.com/640/480/lighter?lock=127",
             28: "https://loremflickr.com/640/480/marker,pen?lock=128"
         };
+        const categoryImages = {
+            trapeadores: "https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?auto=format&fit=crop&q=80&w=1200",
+            escobas: "https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&q=80&w=1200",
+            limpieza: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&q=80&w=1200",
+            varios: "https://images.unsplash.com/photo-1616627981459-8f0c8f5f16c5?auto=format&fit=crop&q=80&w=1200"
+        };
         const fallbackImage = "https://via.placeholder.com/600x400/1d4ed8/facc15?text=Don+Cepillo";
 
         function getProductImage(product) {
-            return product.image || productImages[product.id] || fallbackImage;
+            return product.image || productImages[product.id] || categoryImages[product.sec] || fallbackImage;
         }
 
         function getProductPrice(product, size) {
@@ -422,13 +423,13 @@
         // FILTROS Y RENDER
         function filterCategory(cat, btn) {
             activeCategory = cat;
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active', 'bg-blue-600', 'text-white'));
+            btn.classList.add('active', 'bg-blue-600', 'text-white');
             renderMenu();
         }
 
         function renderMenu() {
-            const sectionsMap = { trapeadores: "🪣 Trapeadores", escobas: "🧹 Escobas", varios: "📦 Varios" };
+            const sectionsMap = { trapeadores: "🪣 Trapeadores", escobas: "🧹 Escobas y cepillos", limpieza: "🧼 Limpieza y baño", varios: "📦 Varios" };
             let keys = activeCategory === 'all' ? Object.keys(sectionsMap) : [activeCategory];
             const container = document.getElementById('menuContent');
             if (!container) return;
@@ -436,19 +437,19 @@
                 <div>
                     <h3 class="text-xl font-bold text-gray-800 border-l-4 border-yellow-400 pl-3 mb-4">${sectionsMap[key]}</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        ${(key === 'varios' ? menuData.filter(p => p.sec === 'varios' || p.sec === 'limpieza') : menuData.filter(p => p.sec === key)).map(product => {
+                        ${menuData.filter(p => p.sec === key).map(product => {
                             const hasGrande = product.priceGrande !== null;
-                            return `<div class="menu-item-card" onclick="openProductModal(${product.id})">
-                                        <img src="${getProductImage(product)}" onerror="this.src='${fallbackImage}'" alt="${product.name}" class="w-full h-44 object-cover">
-                                        <div class="p-4">
-                                            <div class="flex items-center gap-2 mb-1"><span class="font-bold text-gray-800">${product.name}</span>${product.tag ? `<span class="text-[8px] bg-yellow-100 text-blue-700 px-2 py-0.5 rounded-full">${product.tag}</span>` : ''}</div>
-                                            <p class="text-gray-500 text-xs">${product.desc}</p>
-                                            <div class="flex items-center justify-between mt-3 text-sm">
-                                                <span class="text-gray-700">Pieza ${formatter.format(product.priceChico)}</span>
-                                                ${hasGrande ? `<span class="docena-badge">Docena ${formatter.format(product.priceGrande)}</span>` : ''}
+                            return `<div class="menu-item-card rounded-2xl p-4 flex gap-3 items-start" onclick="openProductModal(${product.id})">
+                                        <img src="${getProductImage(product)}" onerror="this.src='${fallbackImage}'" alt="${product.name}" class="w-20 h-20 rounded-xl object-cover border border-blue-100">
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-2"><span class="font-bold text-gray-800">${product.name}</span>${product.tag ? `<span class="text-[8px] bg-yellow-100 text-blue-700 px-2 py-0.5 rounded-full">${product.tag}</span>` : ''}</div>
+                                            <p class="text-gray-500 text-xs mt-0.5">${product.desc}</p>
+                                            <div class="flex gap-3 mt-2 text-sm font-bold">
+                                                <span class="text-red-600">Pieza ${formatter.format(product.priceChico)}</span>
+                                                ${hasGrande ? `<span class="text-gray-600">Docena ${formatter.format(product.priceGrande)}</span>` : ''}
                                             </div>
-                                            <button onclick="event.stopPropagation(); quickQuote('${product.name}')" class="w-full cta-btn mt-3">Cotizar</button>
                                         </div>
+                                        <button class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-blue-700"><i class="fas fa-plus text-sm"></i></button>
                                     </div>`;
                         }).join('')}
                     </div>
@@ -462,8 +463,6 @@
             currentModalQty = 1;
             currentSize = currentProduct.priceGrande ? 'chico' : 'chico';
             document.getElementById('modalProductName').innerText = currentProduct.name;
-            document.getElementById('modalProductImage').src = getProductImage(currentProduct);
-            document.getElementById('modalProductImage').onerror = function() { this.src = fallbackImage; };
             document.getElementById('modalProductPrice').innerHTML = `<span class="flex gap-3 items-center"><span class="cursor-pointer ${currentSize === 'chico' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('chico')">Pieza ${formatter.format(currentProduct.priceChico)}</span>${currentProduct.priceGrande ? `<span class="cursor-pointer ${currentSize === 'grande' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'} px-3 py-1 rounded-full text-xs font-bold" onclick="event.stopPropagation(); setSizeAndUpdate('grande')">Docena ${formatter.format(currentProduct.priceGrande)}</span>` : ''}</span>`;
             document.getElementById('productNotes').value = '';
             updateModalQty(0);
@@ -496,12 +495,6 @@
             currentModalQty = Math.max(1, currentModalQty + delta); 
             document.getElementById('modalQty').innerText = currentModalQty; 
             if (currentProduct) document.getElementById('modalTotal').innerText = formatter.format(getProductPrice(currentProduct, currentSize) * currentModalQty); 
-        }
-
-        function quickQuote(productName) {
-            const msg = `Hola, me interesa el ${productName}. ¿Me compartes precio de mayoreo?`;
-            window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
-            logActivity("Cotizar producto rápido", { productName });
         }
 
         // WHATSAPP CON INTEGRACIÓN A GOOGLE SHEETS
