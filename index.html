@@ -625,25 +625,29 @@
             });
 
             // Construir mensaje de WhatsApp
-            let msg = `*🧽 ${CONFIG.name} - NUEVO PEDIDO*\n`;
+            let msg = `*🧾 ${CONFIG.name} - COTIZACIÓN / PEDIDO*\n`;
             msg += `*Cliente:* ${name}\n`;
-            msg += `*Dirección:* ${addr}\n`;
-            msg += `*Zona:* ${CONFIG.deliveryZone}\n\n`;
-            msg += `*Pedido:*\n`;
-            
+            msg += `*Entrega:* ${addr}\n`;
+            msg += `*Zona:* ${CONFIG.deliveryZone}\n`;
+            msg += `*Canal:* WhatsApp\n\n`;
+            msg += `*Productos solicitados:*\n`;
+
+            let itemIndex = 1;
             cartItems.forEach(item => {
                 let p = menuData.find(m => m.id === item.id);
                 if (!p) return;
                 let price = getProductPrice(p, item.size);
                 let sub = price * item.qty;
-                msg += `▫️ ${item.qty}x ${p.name} (${item.size === 'grande' ? 'Docena' : 'Pieza'})`;
+                msg += `${itemIndex}. ${item.qty}x ${p.name} (${item.size === 'grande' ? 'Docena' : 'Pieza'})`;
                 if (item.notes) msg += ` [📝 ${item.notes}]`;
                 msg += ` = *${formatter.format(sub)}*\n`;
+                itemIndex += 1;
             });
             
-            msg += `\n*TOTAL: ${formatter.format(total)}*\n`;
+            msg += `\n*Total de pedido: ${formatter.format(total)}*\n`;
             if (notes) msg += `*Instrucciones:* ${notes}\n`;
-            msg += `⏱️ Tiempo estimado: ${CONFIG.deliveryTime}`;
+            msg += `\n⏱️ Tiempo estimado: ${CONFIG.deliveryTime}`;
+            msg += `\n\n_Gracias por su compra._`;
             
             // Abrir WhatsApp
             const whatsappUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
