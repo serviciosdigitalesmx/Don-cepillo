@@ -80,15 +80,10 @@
     <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
         <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'}); logActivity('Click Logo')">
-                <div class="flex items-center -space-x-2">
-                    <div class="w-9 h-9 rounded-full bg-yellow-400 flex items-center justify-center text-blue-900 shadow-md border border-black/10">
-                        <i class="fas fa-broom text-sm"></i>
-                    </div>
-                    <div class="w-6 h-6 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-xs shadow-md border border-black/10">D</div>
-                </div>
-                <div class="leading-none">
-                    <span class="text-xl font-black tracking-tight text-yellow-300 drop-shadow">Don Cepillo</span>
-                    <span class="text-emerald-300 text-[8px] font-bold uppercase block mt-0.5">Fábrica de trapeadores</span>
+                <div class="w-9 h-9 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">D</div>
+                <div>
+                    <span class="text-xl font-black tracking-tight text-white">Don Cepillo</span>
+                    <span class="text-emerald-400 text-[8px] font-bold uppercase block leading-none">Fábrica de trapeadores</span>
                 </div>
             </div>
             <button onclick="openCartModal(); logActivity('Abrir Carrito')" class="relative text-white">
