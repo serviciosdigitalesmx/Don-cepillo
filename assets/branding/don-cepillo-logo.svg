@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-label="Don Cepillo logo">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#2d4fbf"/>
+      <stop offset="100%" stop-color="#1d2f84"/>
+    </linearGradient>
+    <linearGradient id="banner" x1="0" x2="1">
+      <stop offset="0%" stop-color="#f2de57"/>
+      <stop offset="100%" stop-color="#ffe96f"/>
+    </linearGradient>
+  </defs>
+  <circle cx="450" cy="400" r="330" fill="url(#bg)" stroke="#7db9ef" stroke-width="18"/>
+  <path d="M155 640 h590 l-35 52 h-520z" fill="url(#banner)" stroke="#1d2f84" stroke-width="10" />
+  <path d="M90 690 l88 52 88-52" fill="url(#banner)" stroke="#1d2f84" stroke-width="10"/>
+  <path d="M732 690 l88 52-88 52" fill="url(#banner)" stroke="#1d2f84" stroke-width="10"/>
+  <path d="M270 190 l40 250" stroke="#e7c28f" stroke-width="18" stroke-linecap="round"/>
+  <path d="M635 180 l-24 255" stroke="#e7c28f" stroke-width="18" stroke-linecap="round"/>
+  <path d="M470 150 l0 260" stroke="#e7c28f" stroke-width="18" stroke-linecap="round"/>
+  <g transform="translate(120 230)">
+    <ellipse cx="120" cy="245" rx="70" ry="118" fill="#f0f0f0"/>
+    <ellipse cx="105" cy="250" rx="46" ry="94" fill="#ffffff"/>
+  </g>
+  <g transform="translate(300 140)">
+    <ellipse cx="120" cy="260" rx="70" ry="128" fill="#8d63d9"/>
+  </g>
+  <g transform="translate(470 155)">
+    <rect x="95" y="70" width="20" height="150" rx="10" fill="#2f58c7"/>
+    <path d="M0 130 h190 v54 c0 24-16 42-38 46 l-55 11-42 77-42-77-55-11c-22-4-38-22-38-46z" fill="#f2de57" stroke="#1d2f84" stroke-width="8"/>
+  </g>
+  <g transform="translate(575 250)">
+    <rect x="0" y="40" width="170" height="22" fill="#1d2f84"/>
+    <rect x="28" y="60" width="118" height="18" fill="#7db9ef"/>
+  </g>
+  <g transform="translate(595 290)">
+    <path d="M0 120 h140" stroke="#1d2f84" stroke-width="20" stroke-linecap="round"/>
+    <path d="M130 110 l80 -80" stroke="#e7c28f" stroke-width="18" stroke-linecap="round"/>
+    <path d="M188 40 l48 48" stroke="#111" stroke-width="24" stroke-linecap="round"/>
+  </g>
+  <text x="450" y="560" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="132" fill="#ef4444" stroke="#f2de57" stroke-width="18" paint-order="stroke">
+    DON CEPILLO
+  </text>
+  <text x="450" y="760" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="40" fill="#ffffff" letter-spacing="2">
+    FÁBRICA DE TRAPEADORES
+  </text>
+  <text x="450" y="812" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="38" fill="#f2de57" letter-spacing="3">
+    PRODUCTOS DE LIMPIEZA · MAYOREO
+  </text>
+</svg>

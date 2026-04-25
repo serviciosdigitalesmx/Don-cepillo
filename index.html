@@ -53,10 +53,22 @@
             box-shadow: 0 24px 80px rgba(0,0,0,0.35);
             backdrop-filter: blur(6px);
         }
+        .brand-logo {
+            width: 88px;
+            height: 88px;
+            border-radius: 22px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.24);
+            object-fit: contain;
+            padding: 8px;
+        }
         .hero-tag {
             background: var(--primary-yellow);
             color: var(--primary-blue-deep);
             clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%);
+            pointer-events: none;
+            user-select: none;
         }
         .poster-stripe {
             background: linear-gradient(90deg, var(--primary-yellow), #f7e981);
@@ -69,7 +81,7 @@
         .modal-overlay.active { display: flex; animation: fadeIn 0.2s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        .filter-btn { transition: all 0.2s ease; cursor: pointer; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); }
+        .filter-btn { transition: all 0.2s ease; cursor: pointer; background: #dfe8ff; color: #1d2f84; border: 1px solid rgba(29,47,132,0.12); }
         .filter-btn.active { background: var(--primary-yellow) !important; color: var(--primary-blue-deep) !important; border-color: var(--primary-yellow) !important; box-shadow: 0 8px 18px rgba(242,222,87,0.28);}
         
         .menu-item-card {
@@ -81,9 +93,9 @@
         }
         .menu-item-card:hover { border-color: rgba(242,222,87,0.85); transform: translateY(-3px); box-shadow: 0 16px 34px rgba(18, 33, 81, 0.16); }
         .section-chip {
-            background: linear-gradient(90deg, var(--primary-blue), var(--card-blue-2));
-            color: white;
-            box-shadow: 0 8px 20px rgba(45,79,191,0.28);
+            background: linear-gradient(90deg, #f2de57, #ffe96f);
+            color: #1d2f84;
+            box-shadow: 0 8px 20px rgba(45,79,191,0.20);
         }
         
         .toast {
@@ -128,8 +140,8 @@
     <!-- Navbar -->
     <nav class="fixed w-full z-50 bg-[#1d2f84]/92 backdrop-blur-md border-b border-[#f2de57]/35 shadow-lg">
         <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'}); logActivity('Click Logo')">
-                <div class="w-10 h-10 bg-[#f2de57] rounded-full flex items-center justify-center text-[#1d2f84] font-black text-lg shadow-md">D</div>
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'}); logActivity('Click Logo')">
+                <img src="/assets/branding/don-cepillo-logo.svg" alt="Don Cepillo" class="brand-logo">
                 <div>
                     <span class="text-xl brand-font font-black tracking-tight text-white">Don Cepillo</span>
                     <span class="text-[#f2de57] text-[8px] font-bold uppercase block leading-none">Suministro para negocios</span>
@@ -150,9 +162,9 @@
         </div>
         <div class="max-w-4xl relative z-10 hero-card rounded-[2rem] md:rounded-[2.5rem] px-6 py-10 md:px-12 md:py-14">
             <span class="text-[#f2de57] text-xs tracking-[0.35em] block mb-4 font-bold uppercase">Venta al mayoreo para negocios</span>
-            <h1 class="brand-font text-5xl md:text-7xl font-black text-white drop-shadow-2xl leading-none">
-                <span class="text-[#f2de57]">Don</span> Cepillo
-            </h1>
+            <div class="flex flex-col items-center gap-5">
+                <img src="/assets/branding/don-cepillo-logo.svg" alt="Don Cepillo" class="w-56 max-w-[72vw] h-auto">
+            </div>
             <p class="text-white/90 mt-5 max-w-2xl mx-auto text-base md:text-lg font-medium">
                 Trapeadores, escobas, fibras, esponjas y accesorios para tiendas, restaurantes, hoteles, oficinas y distribuidores.
             </p>
@@ -181,10 +193,10 @@
                 <!-- Filtros -->
                 <div id="filterBar" class="sticky top-16 z-30 bg-[#f4f7ff]/92 backdrop-blur-sm py-3 flex flex-wrap gap-2 border-b border-[#d7e1ff] mb-6">
                     <button onclick="filterCategory('all', this); logActivity('Filtrar: Todo')" class="filter-btn active text-[#1d2f84] text-[10px] font-black px-5 py-2 rounded-full">🧽 Todo</button>
-                    <button onclick="filterCategory('trapeadores', this); logActivity('Filtrar: Trapeadores')" class="filter-btn text-slate-100 text-[10px] font-black px-5 py-2 rounded-full">🪣 Trapeadores</button>
-                    <button onclick="filterCategory('escobas', this); logActivity('Filtrar: Escobas')" class="filter-btn text-slate-100 text-[10px] font-black px-5 py-2 rounded-full">🧹 Escobas</button>
-                    <button onclick="filterCategory('limpieza', this); logActivity('Filtrar: Limpieza')" class="filter-btn text-slate-100 text-[10px] font-black px-5 py-2 rounded-full">🧴 Limpieza</button>
-                    <button onclick="filterCategory('varios', this); logActivity('Filtrar: Varios')" class="filter-btn text-slate-100 text-[10px] font-black px-5 py-2 rounded-full">📦 Varios</button>
+                    <button onclick="filterCategory('trapeadores', this); logActivity('Filtrar: Trapeadores')" class="filter-btn text-[10px] font-black px-5 py-2 rounded-full">🪣 Trapeadores</button>
+                    <button onclick="filterCategory('escobas', this); logActivity('Filtrar: Escobas')" class="filter-btn text-[10px] font-black px-5 py-2 rounded-full">🧹 Escobas</button>
+                    <button onclick="filterCategory('limpieza', this); logActivity('Filtrar: Limpieza')" class="filter-btn text-[10px] font-black px-5 py-2 rounded-full">🧴 Limpieza</button>
+                    <button onclick="filterCategory('varios', this); logActivity('Filtrar: Varios')" class="filter-btn text-[10px] font-black px-5 py-2 rounded-full">📦 Varios</button>
                 </div>
 
                 <div id="menuContent" class="space-y-10"></div>
@@ -504,7 +516,7 @@
             if (!container) return;
             container.innerHTML = keys.map(key => `
                 <div>
-                    <h3 class="text-xl font-bold text-gray-800 border-l-4 border-yellow-400 pl-3 mb-4">${sectionsMap[key]}</h3>
+                    <h3 class="section-chip inline-flex items-center text-xl font-black rounded-full px-4 py-2 mb-4">${sectionsMap[key]}</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         ${menuData.filter(p => p.sec === key).map(product => {
                             const hasGrande = product.priceGrande !== null;
@@ -518,7 +530,7 @@
                                                 ${hasGrande ? `<span class="text-gray-600">Docena ${formatter.format(product.priceGrande)}</span>` : ''}
                                             </div>
                                         </div>
-                                        <button class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-blue-700"><i class="fas fa-plus text-sm"></i></button>
+                                        <button class="bg-[#f2de57] text-[#1d2f84] w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-[#ffe96f]"><i class="fas fa-plus text-sm"></i></button>
                                     </div>`;
                         }).join('')}
                     </div>
