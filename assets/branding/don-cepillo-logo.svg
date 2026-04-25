@@ -10,7 +10,7 @@
     </linearGradient>
   </defs>
 
-  <circle cx="450" cy="380" r="300" fill="url(#bg)" stroke="#7db9ef" stroke-width="18"/>
+  <circle cx="450" cy="380" r="300" fill="#2f8f46" stroke="#7db9ef" stroke-width="18"/>
   <path d="M175 610 h550 l-30 40 h-490z" fill="#f7e06a" stroke="#1d2f84" stroke-width="10" />
   <path d="M140 652 l60 40 60-40" fill="#f7e06a" stroke="#1d2f84" stroke-width="10"/>
   <path d="M640 652 l60 40 60-40" fill="#f7e06a" stroke="#1d2f84" stroke-width="10"/>
