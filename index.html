@@ -76,6 +76,23 @@
             box-shadow: none;
             border: 0;
             cursor: default;
+            opacity: 0.98;
+        }
+        .hero-badge::before {
+            content: "✓";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.45rem;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.22);
+            color: currentColor;
+            font-size: 0.68rem;
+            font-weight: 900;
+            line-height: 1;
+            vertical-align: middle;
         }
         .poster-stripe {
             background: linear-gradient(90deg, var(--primary-yellow), #f7e981);
