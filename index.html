@@ -80,10 +80,12 @@
     <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
         <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'}); logActivity('Click Logo')">
-                <div class="w-9 h-9 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">D</div>
-                <div>
-                    <span class="text-xl font-black tracking-tight text-white">Don Cepillo</span>
-                    <span class="text-emerald-400 text-[8px] font-bold uppercase block leading-none">Fábrica de trapeadores</span>
+                <div class="w-9 h-9 rounded-full bg-yellow-400 flex items-center justify-center text-blue-900 shadow-md">
+                    <i class="fas fa-broom text-sm"></i>
+                </div>
+                <div class="leading-none">
+                    <span class="text-xl font-black tracking-tight text-yellow-300 drop-shadow">DON CEPILLO</span>
+                    <span class="text-emerald-300 text-[8px] font-bold uppercase block mt-0.5">Productos de limpieza</span>
                 </div>
             </div>
             <button onclick="openCartModal(); logActivity('Abrir Carrito')" class="relative text-white">
@@ -275,14 +277,7 @@
             { id: 28, sec: "varios", name: "Marcador negro", priceChico: 55, priceGrande: null, desc: "Caja con 10 por $55", tag: "🖊️ Oficina" }
         ];
 
-        let cartItems = JSON.parse(localStorage.getItem(CONFIG.storageKey)) || [];
-        let currentProduct = null;
-        let currentModalQty = 1;
-        let currentSize = 'chico';
-        let activeCategory = 'all';
-
-        const formatter = new Intl.NumberFormat('es-MX', { style: 'currency', currency: CONFIG.currency, minimumFractionDigits: 0 });
-        const productImages = {
+        const productImagesById = {
             1: "https://loremflickr.com/640/480/mop,cotton?lock=101",
             2: "https://loremflickr.com/640/480/mop,braided?lock=102",
             3: "https://loremflickr.com/640/480/mop,string?lock=103",
@@ -312,6 +307,17 @@
             27: "https://loremflickr.com/640/480/lighter?lock=127",
             28: "https://loremflickr.com/640/480/marker,pen?lock=128"
         };
+        menuData.forEach(product => {
+            product.image = productImagesById[product.id] || product.image || null;
+        });
+
+        let cartItems = JSON.parse(localStorage.getItem(CONFIG.storageKey)) || [];
+        let currentProduct = null;
+        let currentModalQty = 1;
+        let currentSize = 'chico';
+        let activeCategory = 'all';
+
+        const formatter = new Intl.NumberFormat('es-MX', { style: 'currency', currency: CONFIG.currency, minimumFractionDigits: 0 });
         const categoryImages = {
             trapeadores: "https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?auto=format&fit=crop&q=80&w=1200",
             escobas: "https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&q=80&w=1200",
@@ -321,7 +327,7 @@
         const fallbackImage = "https://via.placeholder.com/600x400/1d4ed8/facc15?text=Don+Cepillo";
 
         function getProductImage(product) {
-            return product.image || productImages[product.id] || categoryImages[product.sec] || fallbackImage;
+            return product.image || categoryImages[product.sec] || fallbackImage;
         }
 
         function getProductPrice(product, size) {
