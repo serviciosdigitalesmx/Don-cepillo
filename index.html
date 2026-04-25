@@ -275,38 +275,40 @@
             { id: 28, sec: "varios", name: "Marcador negro", priceChico: 55, priceGrande: null, desc: "Caja con 10 por $55", tag: "🖊️ Oficina" }
         ];
 
-        const productImagesById = {
-            1: "https://loremflickr.com/640/480/mop,cotton?lock=101",
-            2: "https://loremflickr.com/640/480/mop,braided?lock=102",
-            3: "https://loremflickr.com/640/480/mop,string?lock=103",
-            4: "https://loremflickr.com/640/480/mop,cleaning?lock=104",
-            5: "https://loremflickr.com/640/480/mop,white?lock=105",
-            6: "https://loremflickr.com/640/480/mop,colorful?lock=106",
-            7: "https://loremflickr.com/640/480/broom?lock=107",
-            8: "https://loremflickr.com/640/480/brush,floor?lock=108",
-            9: "https://loremflickr.com/640/480/broom,colorful?lock=109",
-            10: "https://loremflickr.com/640/480/broom,plastic?lock=110",
-            11: "https://loremflickr.com/640/480/squeegee,window?lock=111",
-            12: "https://loremflickr.com/640/480/dustpan?lock=112",
-            13: "https://loremflickr.com/640/480/bath,loofah?lock=113",
-            14: "https://loremflickr.com/640/480/scrubber,scouring?lock=114",
-            15: "https://loremflickr.com/640/480/rubber,gloves?lock=115",
-            16: "https://loremflickr.com/640/480/spray,bottle?lock=116",
-            17: "https://loremflickr.com/640/480/spray,nozzle?lock=117",
-            18: "https://loremflickr.com/640/480/steel,wool?lock=118",
-            19: "https://loremflickr.com/640/480/sponge,smile?lock=119",
-            20: "https://loremflickr.com/640/480/microfiber,cloth?lock=120",
-            21: "https://loremflickr.com/640/480/clothespin?lock=121",
-            22: "https://loremflickr.com/640/480/clothesline,rope?lock=122",
-            23: "https://loremflickr.com/640/480/plunger,toilet?lock=123",
-            24: "https://loremflickr.com/640/480/cleaning,brush?lock=124",
-            25: "https://loremflickr.com/640/480/aa,batteries?lock=125",
-            26: "https://loremflickr.com/640/480/aaa,batteries?lock=126",
-            27: "https://loremflickr.com/640/480/lighter?lock=127",
-            28: "https://loremflickr.com/640/480/marker,pen?lock=128"
+        const ASSET_BASE_URL = "https://raw.githubusercontent.com/serviciosdigitalesmx/Don-cepillo/main/assets/images/products/";
+        const productImageFilesById = {
+            1: "trapeador_hilaza.jpg",
+            2: "trapeador_trenzado.jpg",
+            3: "trapeador_fibra_espanola.jpg",
+            4: "trapeador_magiti.jpg",
+            5: "trapeador_pabilo_algodon.jpg",
+            6: "trapeador_payaso.jpg",
+            7: "escoba_abanico.jpg",
+            8: "cepillo_recto.jpg",
+            9: "escoba_super_lukas.jpg",
+            10: "escoba_mega.jpg",
+            11: "jalador_agua_50_cm.jpg",
+            12: "recogedor.jpg",
+            13: "borla_puff_paq_5.jpg",
+            14: "tallador_multiusos_paq_10.jpg",
+            15: "guantes_multiusos.jpg",
+            16: "atomizador_cbotella_paq_4.jpg",
+            17: "pistola_uso_rudo_paq_10.jpg",
+            18: "fibra_metalica_paq_10.jpg",
+            19: "esponja_carita_paq_20.jpg",
+            20: "microfibra_toalla_paq_10.jpg",
+            21: "pinzas_pza.jpg",
+            22: "lazo.jpg",
+            23: "bomba_de_bano.jpg",
+            24: "cepillo_plancha.jpg",
+            25: "pilas_aa_caja_24.jpg",
+            26: "pilas_aaa_caja_24.jpg",
+            27: "encendedor_eco_caja_50.jpg",
+            28: "marcador_negro_caja_10.jpg"
         };
         menuData.forEach(product => {
-            product.image = productImagesById[product.id] || product.image || null;
+            const fileName = productImageFilesById[product.id];
+            product.image = fileName ? `${ASSET_BASE_URL}${fileName}` : null;
         });
 
         let cartItems = JSON.parse(localStorage.getItem(CONFIG.storageKey)) || [];
