@@ -54,12 +54,13 @@
             backdrop-filter: blur(6px);
         }
         .brand-logo {
-            width: 104px;
-            height: 104px;
+            width: 92px;
+            height: 92px;
             object-fit: contain;
             display: block;
             filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
             opacity: 1;
+            flex-shrink: 0;
         }
         .hero-logo-mark {
             width: min(340px, 78vw);
@@ -189,7 +190,7 @@
 
     <!-- Navbar -->
     <nav class="fixed w-full z-50 bg-[#1d2f84]/92 backdrop-blur-md border-b border-[#f2de57]/35 shadow-lg">
-        <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-5 h-20 flex items-center justify-between overflow-visible">
                 <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'}); logActivity('Click Logo')">
                 <img src="assets/branding/don-cepillo-logo-final.png" alt="Don Cepillo" class="brand-logo">
                 <div>
